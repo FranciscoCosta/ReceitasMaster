@@ -32,6 +32,7 @@ model Recipe {
   categories String
   tumbnail String?
   rating Int?
+  
 
 }
 
