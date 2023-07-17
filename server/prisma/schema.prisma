@@ -11,28 +11,49 @@ datasource db {
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  email String @unique
+  id             Int         @id @default(autoincrement())
+  email          String      @unique
   hashedPassword String
-  firstName String?
-  lastName String?
-  image String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  firstName      String?
+  lastName       String?
+  image          String?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  recipes         Recipe[]
+  reviews         Review[]
+
+  @@map("users")
 }
 
 model Recipe {
-  id Int @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title String
-  description String
-  ingredients String
+  id           Int         @id @default(autoincrement())
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  title        String
+  description  String
+  ingredients  String
   instructions String
-  categories String
-  tumbnail String?
-  rating Int?
-  
+  categories   String
+  tumbnail     String?
+  rating       Int?
+  userId       Int?
+  user         User?       @relation(fields: [userId], references: [id])
+  reviews       Review[]
 
+  @@map("recipes")
 }
 
+model Review {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  rating    Int
+  comment   String?
+  recipeId  Int?
+  recipe    Recipe?  @relation(fields: [recipeId], references: [id])
+  userId    Int?
+  user      User?    @relation(fields: [userId], references: [id])
+
+  @@map("reviews")
+
+}
