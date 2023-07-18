@@ -9,10 +9,10 @@ import {
   Param,
   Body,
 } from '@nestjs/common';
-import { JwtGuard } from 'src/auth/guard';
+import { JwtGuard } from '../auth/guard';
 import { RecipeService } from './recipe.service';
 import { CreateRecipeDto, EditRecipeDto } from './dto';
-import { GetUser } from 'src/auth/decorator';
+import { GetUser } from '../auth/decorator';
 
 @Controller('recipes')
 export class RecipeController {

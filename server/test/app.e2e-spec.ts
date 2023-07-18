@@ -5,7 +5,6 @@ import * as pactum from 'pactum';
 import { ValidationPipe } from '@nestjs/common';
 import PrismaService from '../src/prisma/prisma.service';
 import { AuthDto } from 'src/auth/dto';
-import { access } from 'fs';
 describe('App e2e', () => {
   let app: INestApplication;
   let prisma: PrismaService;
@@ -127,6 +126,12 @@ describe('App e2e', () => {
       });
     });
   });
-  // describe('Recipe', () => {});
+  describe('Recipe', () => {
+    describe('Get all recipes', () => {
+      it('Should return all recipes', () => {
+        return pactum.spec().get('recipes').expectStatus(200);
+      });
+    });
+  });
   // describe('Review', () => {});
 });

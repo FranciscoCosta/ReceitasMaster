@@ -1,9 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { EditRecipeDto, CreateRecipeDto } from './dto';
+import PrismaService from '../prisma/prisma.service';
 
 @Injectable()
 export class RecipeService {
-  getRecipes() {}
+  constructor(private prisma: PrismaService) {}
+  getRecipes() {
+    return this.prisma.recipe.findMany();
+  }
 
   getRecipeById(recipeId: number) {}
 
