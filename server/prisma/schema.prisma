@@ -31,9 +31,9 @@ model Recipe {
   updatedAt    DateTime    @updatedAt
   title        String
   description  String
-  ingredients  String
-  instructions String
-  categories   String
+  ingredients  String[]
+  instructions String[]
+  categories   String[]
   tumbnail     String?
   rating       Int?
   userId       Int?

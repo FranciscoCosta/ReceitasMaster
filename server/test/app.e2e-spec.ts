@@ -5,6 +5,7 @@ import * as pactum from 'pactum';
 import { ValidationPipe } from '@nestjs/common';
 import PrismaService from '../src/prisma/prisma.service';
 import { AuthDto } from 'src/auth/dto';
+import { access } from 'fs';
 describe('App e2e', () => {
   let app: INestApplication;
   let prisma: PrismaService;
@@ -84,11 +85,48 @@ describe('App e2e', () => {
           .spec()
           .post('auth/signin')
           .withBody(dto)
-          .expectStatus(200);
+          .expectStatus(200)
+          .stores('userAt', 'access_token');
       });
     });
   });
-  // describe('User', () => {});
+  describe('User', () => {
+    describe('Get me', () => {
+      it('Should return unauthorized if no access_token', () => {
+        return pactum.spec().get('users/me').expectStatus(401);
+      });
+      it('Should return user', () => {
+        return pactum
+          .spec()
+          .get('users/me')
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
+          .expectStatus(200);
+      });
+    });
+    describe('Edit User', () => {
+      const dto = {
+        firstName: 'francisco',
+        lastName: 'Costa',
+      };
+      it('Should return unauthorized if no access_token', () => {
+        return pactum.spec().patch('users').expectStatus(401);
+      });
+      it('Should edit user', () => {
+        return pactum
+          .spec()
+          .patch('users')
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
+          .withBody(dto)
+          .expectStatus(200)
+          .expectBodyContains(dto.firstName)
+          .expectBodyContains(dto.lastName);
+      });
+    });
+  });
   // describe('Recipe', () => {});
   // describe('Review', () => {});
 });
