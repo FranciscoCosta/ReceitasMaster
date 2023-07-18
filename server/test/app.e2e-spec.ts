@@ -187,6 +187,19 @@ describe('App e2e', () => {
           .inspect();
       });
     });
+    describe('Delete recipe by id', () => {
+      it('should delete recipe', () => {
+        return pactum
+          .spec()
+          .delete('recipes/{id}')
+          .withPathParams('id', '$S{recipeId}')
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
+          .expectStatus(204)
+          .inspect();
+      });
+    });
   });
 });
 // describe('Review', () => {});

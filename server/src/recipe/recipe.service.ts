@@ -25,7 +25,6 @@ export class RecipeService {
     const recipe = await this.prisma.recipe.findUnique({
       where: { id: recipeId },
     });
-    console.log(recipe, 'ASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
     if (!recipe || recipe.userId !== userId) {
       throw new ForbiddenException('Acesso negado');
     }
@@ -36,5 +35,15 @@ export class RecipeService {
     });
   }
 
-  deleteRecipeById(userId: number, recipeId: number) {}
+  async deleteRecipeById(userId: number, recipeId: number) {
+    const recipe = await this.prisma.recipe.findUnique({
+      where: { id: recipeId },
+    });
+    if (recipe.userId !== userId) {
+      throw new ForbiddenException('Acesso negado');
+    }
+    return this.prisma.recipe.delete({
+      where: { id: recipeId },
+    });
+  }
 }

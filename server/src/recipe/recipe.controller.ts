@@ -7,7 +7,9 @@ import {
   Delete,
   ParseIntPipe,
   Param,
+  HttpStatus,
   Body,
+  HttpCode,
 } from '@nestjs/common';
 import { JwtGuard } from '../auth/guard';
 import { RecipeService } from './recipe.service';
@@ -47,6 +49,7 @@ export class RecipeController {
     return this.recipeService.editRecipeById(userId, recipeId, editRecipeDto);
   }
 
+  @HttpCode(204)
   @UseGuards(JwtGuard)
   @Delete(':id')
   deleteRecipeById(
