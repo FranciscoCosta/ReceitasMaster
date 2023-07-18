@@ -35,7 +35,9 @@ model Recipe {
   instructions String[]
   categories   String[]
   tumbnail     String?
-  rating       Int?
+  rating       Float?
+  totalRating  Int?
+  totalReviews Int?
   userId       Int?
   user         User?       @relation(fields: [userId], references: [id])
   reviews       Review[]
@@ -48,7 +50,7 @@ model Review {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   rating    Int
-  comment   String?
+  comment   String
   recipeId  Int?
   recipe    Recipe?  @relation(fields: [recipeId], references: [id])
   userId    Int?

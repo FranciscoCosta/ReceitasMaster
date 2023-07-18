@@ -7,7 +7,6 @@ import {
   Delete,
   ParseIntPipe,
   Param,
-  HttpStatus,
   Body,
   HttpCode,
 } from '@nestjs/common';
