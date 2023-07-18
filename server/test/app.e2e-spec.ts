@@ -5,6 +5,7 @@ import * as pactum from 'pactum';
 import { ValidationPipe } from '@nestjs/common';
 import PrismaService from '../src/prisma/prisma.service';
 import { AuthDto } from 'src/auth/dto';
+import { CreateRecipeDto } from 'src/recipe/dto';
 describe('App e2e', () => {
   let app: INestApplication;
   let prisma: PrismaService;
@@ -130,6 +131,30 @@ describe('App e2e', () => {
     describe('Get all recipes', () => {
       it('Should return all recipes', () => {
         return pactum.spec().get('recipes').expectStatus(200);
+      });
+    });
+    describe('Create new recipe', () => {
+      const dto: CreateRecipeDto = {
+        title: 'recipe title',
+        description: 'recipe description',
+        ingredients: ['ingredient 1', 'ingredient 2'],
+        instructions: ['instruction 1', 'instruction 2'],
+        tumbnail:
+          'https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg',
+        categories: ['category 1', 'category 2'],
+        rating: 5,
+        userId: 1,
+      };
+
+      it('Should create new recipe', () => {
+        return pactum
+          .spec()
+          .post('recipes')
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
+          .withBody(dto)
+          .expectStatus(201);
       });
     });
   });
