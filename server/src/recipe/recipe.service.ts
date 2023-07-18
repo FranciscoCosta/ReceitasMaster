@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { EditRecipeDto, CreateRecipeDto } from './dto';
 import PrismaService from '../prisma/prisma.service';
 
@@ -21,7 +21,20 @@ export class RecipeService {
     });
   }
 
-  editRecipeById(userId: number, recipeId: number, dto: EditRecipeDto) {}
+  async editRecipeById(userId: number, recipeId: number, dto: EditRecipeDto) {
+    const recipe = await this.prisma.recipe.findUnique({
+      where: { id: recipeId },
+    });
+    console.log(recipe, 'ASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+    if (!recipe || recipe.userId !== userId) {
+      throw new ForbiddenException('Acesso negado');
+    }
+
+    return this.prisma.recipe.update({
+      where: { id: recipeId },
+      data: { ...dto } as any,
+    });
+  }
 
   deleteRecipeById(userId: number, recipeId: number) {}
 }

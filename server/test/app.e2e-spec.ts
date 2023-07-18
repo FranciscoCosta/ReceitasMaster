@@ -5,7 +5,7 @@ import * as pactum from 'pactum';
 import { ValidationPipe } from '@nestjs/common';
 import PrismaService from '../src/prisma/prisma.service';
 import { AuthDto } from 'src/auth/dto';
-import { CreateRecipeDto } from 'src/recipe/dto';
+import { CreateRecipeDto, EditRecipeDto } from 'src/recipe/dto';
 describe('App e2e', () => {
   let app: INestApplication;
   let prisma: PrismaService;
@@ -165,9 +165,28 @@ describe('App e2e', () => {
           .get('recipes/{id}')
           .withPathParams('id', '$S{recipeId}')
           .expectStatus(200)
+          .expectBodyContains('$S{recipeId}');
+      });
+    });
+    describe('Edit recipe by id', () => {
+      const dto: EditRecipeDto = {
+        title: 'recipe title edited',
+        description: 'recipe description edited',
+      };
+      it('should edit recipe', () => {
+        return pactum
+          .spec()
+          .patch('recipes/{id}')
+          .withPathParams('id', '$S{recipeId}')
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
+          .withBody(dto)
+          .expectStatus(200)
+          .expectBodyContains(dto.title)
           .inspect();
       });
     });
   });
-  // describe('Review', () => {});
 });
+// describe('Review', () => {});
