@@ -15,7 +15,11 @@ export class RecipeService {
     return recipe;
   }
 
-  getRecipeById(recipeId: number) {}
+  getRecipeById(recipeId: number) {
+    return this.prisma.recipe.findUnique({
+      where: { id: recipeId },
+    });
+  }
 
   editRecipeById(userId: number, recipeId: number, dto: EditRecipeDto) {}
 

@@ -154,7 +154,18 @@ describe('App e2e', () => {
             Authorization: 'Bearer $S{userAt}',
           })
           .withBody(dto)
-          .expectStatus(201);
+          .expectStatus(201)
+          .stores('recipeId', 'id');
+      });
+    });
+    describe('Get recipe by id', () => {
+      it('Should recipe by id', () => {
+        return pactum
+          .spec()
+          .get('recipes/{id}')
+          .withPathParams('id', '$S{recipeId}')
+          .expectStatus(200)
+          .inspect();
       });
     });
   });
