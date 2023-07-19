@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import './Navbar.scss'
-
+import { motion } from "framer-motion"
 import { CgProfile } from 'react-icons/cg';
 import { FaCashRegister } from 'react-icons/fa';
 import { BsBookFill } from 'react-icons/bs';
@@ -58,7 +58,13 @@ const Navbar = () => {
     return (
         <nav className='Navbar'>
             <div className='Navbar__container'>
-                <div className='Navbar__left'>
+                <div className='Navbar__left'
+                    onClick={() => {
+                        router.push("/")
+                        router.refresh()
+                    }
+                    }
+                >
                     <div className='Navbar__logo'>
                         <Image src='/assets/logo.png' alt='logo' fill className='logo__image' />
                     </div>
@@ -118,13 +124,17 @@ const Navbar = () => {
                                 Sair
                             </button>
                     }
-                    <div className={`Navbar__menu ${activeMenu ? 'active' : ''}`}>
+                    <motion.div
+                        whileInView={{ opacity: [0, 1] }}
+                        transition={{ duration: 0.5 }}
+
+                        className={`Navbar__menu ${activeMenu ? 'active' : ''}`}>
                         {
                             (currentUserEmail == '') ? (
                                 <div>
-                                    <Link href={"/register"} className='Navbar__link'><FaCashRegister />Cadastrar</Link >
-                                    <Link href={"/"} className='Navbar__link'><BsBookFill />Ver Receitas</Link >
-                                    <Link href={"/"} className='Navbar__link'><MdFavorite />Favoritos</Link >
+                                    <Link href={"/register"} className='Navbar__link'><FaCashRegister /></Link >
+                                    <Link href={"/"} className='Navbar__link'><BsBookFill /></Link >
+                                    <Link href={"/"} className='Navbar__link'><MdFavorite /></Link >
                                 </div>
                             ) : (
                                 <div >
@@ -137,10 +147,10 @@ const Navbar = () => {
                                 </div>
                             )
                         }
-                    </div>
+                    </motion.div>
                 </div>}
             </div>
-        </nav>
+        </nav >
     )
 }
 
