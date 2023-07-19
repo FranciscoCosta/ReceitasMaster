@@ -39,20 +39,22 @@ function Login() {
                     <form>
                         <div className='input__group'>
                             <input
-                                autoComplete='nope'
+                                autoComplete="off"
                                 placeholder=' '
                                 name="email"
                                 type="email"
+                                required
                                 onChange={(e) => setEmail(e.target.value)}
                             />
                             <label htmlFor="">Email:</label>
                         </div>
                         <div className='input__group'>
                             <input
-                                autoComplete='nope'
-                                placeholder=' '
+                                autoComplete="off"
+                                placeholder=''
                                 name="password"
                                 type="password"
+                                required
                                 onChange={(e) => setPassword(e.target.value)} />
                             <label htmlFor="">Senha:</label>
                         </div>
