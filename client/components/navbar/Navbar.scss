@@ -122,7 +122,7 @@
             width: 100%;
             min-width: 350px;
             height: 100%;
-            background-color: #ffffff92;
+            background-color: var(--secondary-text-color);
             border: 1px solid var(--secondary-text-color);
             border-radius: 20px;
             padding: 0.5rem;
@@ -137,7 +137,7 @@
               color: var(--primary-text-color);
               transition: all 0.3s ease-in-out;
               svg {
-                color: var(--secondary-text-color);
+                color: var(--primary-text-color);
                 font-size: 25px;
                 transition: all 0.3s ease-in-out;
 

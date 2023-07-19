@@ -47,12 +47,16 @@ function Register() {
                 email,
                 password,
                 firstName,
-                lastName    
+                lastName
             })
-            
+            localStorage.setItem("user", JSON.stringify(email));
+            localStorage.setItem("accessToken", JSON.stringify(response.data.access_token));
+            router.push("/")
+            router.refresh();
 
-        } catch (error : any) {
-           setError(error.response.data.message );
+
+        } catch (error: any) {
+            setError(error.response.data.message);
         }
 
     }

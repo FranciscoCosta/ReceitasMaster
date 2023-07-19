@@ -99,7 +99,10 @@ const Navbar = () => {
                     {
                         (currentUserEmail == '') ?
                             (<button
-                                onClick={() => router.push("/login")}
+                                onClick={() => {
+                                    router.push("/login")
+                                    router.refresh()
+                                }}
                             >
                                 Entrar
                             </button>) :
@@ -108,6 +111,7 @@ const Navbar = () => {
                                     localStorage.removeItem("user");
                                     localStorage.removeItem("accessToken");
                                     router.push("/login");
+                                    router.refresh();
                                 }
                                 }
                             >
