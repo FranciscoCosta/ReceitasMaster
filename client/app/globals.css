@@ -12,7 +12,7 @@
   --primary-text-color: #141414;
   --secondary-text-color: #50a028;
   --light-text-color: #fff;
-  --main-background-color: #eaf5c597;
+  --main-background-color: #eaf5c5;
   --shadow: rgba(0, 0, 0, 0.05);
   --box-shadow: rgba(0, 0, 0, 0.25);
   --background-overlay: linear-gradient(
@@ -37,3 +37,12 @@
   min-height: 100vh;
   background-color: var(--main-background-color);
 }
+
+.spacer{
+  aspect-ratio: 900/100;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
