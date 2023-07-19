@@ -1,16 +1,31 @@
 "use client"
 
 import './Login.scss'
-
+import newRequest from '../../utils/newRequest'
 import bg from '../../public/assets/green_white_spacer.svg'
 
-import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 function Login() {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [error, setError] = useState<string>('');
+    const router = useRouter(); 
     const handleSubmit = async (e: any) => {
+        e.preventDefault();
+        try {
+            const response = await newRequest.post("/auth/signin", {
+                email,
+                password
+            });
+            localStorage.setItem("user", JSON.stringify(email));
+            localStorage.setItem("accessToken", JSON.stringify(response.data.access_token));
+            router.push("/")
+
+        } catch (error: any) {
+            setError(error.response.data.message);
+        }
     }
     return (
         <div className="Login">
