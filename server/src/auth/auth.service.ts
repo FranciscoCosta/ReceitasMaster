@@ -20,6 +20,8 @@ class AuthService {
         data: {
           email: dto.email,
           hashedPassword,
+          firstName: dto.firstName,
+          lastName: dto.lastName,
         },
       });
       return this.signToken(user.id, user.email);

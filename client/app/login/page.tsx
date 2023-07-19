@@ -51,7 +51,7 @@ function Login() {
                         <div className='input__group'>
                             <input
                                 autoComplete="off"
-                                placeholder=''
+                                placeholder=' '
                                 name="password"
                                 type="password"
                                 required

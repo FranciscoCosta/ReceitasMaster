@@ -118,7 +118,7 @@ const Navbar = () => {
                         {
                             (currentUserEmail == '') ? (
                                 <div>
-                                    <Link href={"/"} className='Navbar__link'><FaCashRegister />Cadastrar</Link >
+                                    <Link href={"/register"} className='Navbar__link'><FaCashRegister />Cadastrar</Link >
                                     <Link href={"/"} className='Navbar__link'><BsBookFill />Ver Receitas</Link >
                                     <Link href={"/"} className='Navbar__link'><MdFavorite />Favoritos</Link >
                                 </div>
