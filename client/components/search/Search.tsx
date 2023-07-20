@@ -1,23 +1,48 @@
 "use client"
 
-import React, { useState, useEffect } from 'react'
 import './Search.scss'
 import { motion } from 'framer-motion'
 import newRequest from '@/utils/newRequest'
 
+import React, { useState, useEffect } from 'react'
 import { LuSearch } from 'react-icons/lu';
 
-import { CustomFilter } from '../index';
+import { CardRecipe, CustomFilter } from '../index';
+
 import bg from '../../public/assets/white_green_spacer.svg'
+import { CustomCardRecipeProps } from '@/types'
+
+const fakeRecipes = [
+    {
+        id: 1,
+        tumbnail: "https://img.freepik.com/premium-photo/hamburger-with-lettuce-tomato-cheese-it_741212-1661.jpg?w=360",
+        title: "Hamburger",
+        duration: 30,
+        serves: 1,
+        categories: ["Sobremesa"]
+    },
+    {
+        id: 2,
+        tumbnail: "https://www.estadao.com.br/resizer/cWrh_vgbzUS-OCi7InP-JNvf6yw=/720x503/filters:format(jpg):quality(80):focal(-5x-5:5x5)/cloudfront-us-east-1.images.arcpublishing.com/estadao/FIVYQFU6J5ND3PYRA6XQHR4NW4.jpg",
+        title: "Bolo de chocolate",
+        duration: 30,
+        serves: 4,
+        categories: ["Sanduíche"]
+    }]
 function Search() {
 
-    const [recipes, setRecipes] = useState([])
+
+
+    const [recipes, setRecipes] = useState([] as any)
     const [isLoading, setIsLoading] = useState(true)
 
     const getRecipes = async () => {
         setIsLoading(true)
-        const response = await newRequest.get("/recipes", {});
-        setRecipes(response.data || [])
+        // const response = await newRequest.get("/recipes");
+        console.log(fakeRecipes)
+        setRecipes(fakeRecipes)
+
+        // setRecipes(response.data || [])
         setIsLoading(false)
 
     }
@@ -98,11 +123,12 @@ function Search() {
                     <motion.h3
                         whileInView={{ opacity: [0, 1] }}
                         transition={{ duration: 0.5, delay: 1 }}
+                        className='Search__recipes-title'
                     >Receitas</motion.h3>
                     {!isLoading && <div className="Search__recipes-list">
                         {
-                            recipes.map((recipe, index) => (
-                                <h1>A</h1>
+                            recipes.map((recipe: CustomCardRecipeProps, index: number) => (
+                                <CardRecipe tumbnail={recipe.tumbnail} title={recipe.title} duration={recipe.duration} serves={recipe.serves} category={recipe.categories[0]} as any />
                             ))
 
                         }
@@ -116,4 +142,4 @@ function Search() {
     )
 }
 
-export default Search
+export default Search;

@@ -3,4 +3,5 @@ import Footer from "./footer";
 import Hero from "./hero";
 import CustomFilter from "./customFilter";
 import Search from "./search";
-export { Navbar, Footer, Hero, Search, CustomFilter };
+import CardRecipe from "./cardRecipe";
+export { Navbar, Footer, Hero, Search, CustomFilter, CardRecipe };

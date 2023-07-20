@@ -83,6 +83,29 @@
             cursor: pointer;
           }
         }
+
+      }
+
+    }
+    .Search__recipes{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      gap: 2rem;
+      margin-top: 5rem;
+      .Search__recipes-title {
+        margin-left: 1.5rem;
+        letter-spacing: 2px;
+        font-size: 3rem;
+        font-weight: 900;
+        color: var(--primary-text-color);
+      }
+      .Search__recipes-list{
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
       }
     }
   }

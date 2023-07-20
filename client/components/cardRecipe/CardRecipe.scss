@@ -1,0 +1,100 @@
+.CardRecipe {
+  width: 400px;
+  height: 300px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer;
+  border: none;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  border-radius: 20px;
+  margin: 1.5rem;
+  transition: 0.5s;
+  background-image: linear-gradient(
+    to top,
+
+    #e4e6f1 0%,
+    #f3f3f3 100%
+  );
+
+  .CardRecipe__top {
+    width: 100%;
+    height: 60%;
+    position: relative;
+
+    .overlay__bg {
+      background-color: rgba(255, 255, 255, 0.1);
+      position: absolute;
+      z-index: 100;
+      width: 100%;
+      height: 100%;
+
+      &:hover{
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+    .CardRecipe__heart{
+      position: absolute;
+      z-index: 999;
+      font-size: 50px;
+      right: 30px;
+      top: 10px;
+      padding: 0.4rem;
+      border-radius: 50%;
+      border: 1px solid #fff;
+      background-color: rgba(255, 255, 255, 0.7);
+    }
+
+    .CardRecipe__img {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+  }
+
+  .CardRecipe__bottom {
+    height: 40%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    .CardRecipe__title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--main-text-color);
+      margin: 0.5rem;
+      width: 100%;
+      text-align: center;
+    }
+    .CardRecipe__info {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .CardRecipe__info--duration,
+    .CardRecipe__info--serves,
+    .CardRecipe__info--category {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+
+      svg{
+        font-size: 30px;
+      }
+    }
+  }
+
+  &:hover{
+    transform: scale(1.05);
+  }
+}
