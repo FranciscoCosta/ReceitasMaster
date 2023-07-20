@@ -15,7 +15,7 @@ const Footer = () => {
       <div className='Footer__container'>
         <div className='Footer__container__left'>
           <div className='Footer__title'>
-            <h1>Receita<span>Master</span></h1>
+            <h1>Master<span>Receita</span></h1>
           </div>
           <div className='Footer__description'>
             <Link href='/'>Home</Link>

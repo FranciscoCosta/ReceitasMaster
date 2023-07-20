@@ -21,6 +21,7 @@ const Navbar = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [firstName, setFirstName] = useState<string>('');
     const [lastName, setLastName] = useState<string>('');
+    const [userImage, setUserImage] = useState<string>('');
     const currentUserEmail = typeof window !== "undefined" ? localStorage.getItem("user") || '' : '';
 
     useEffect(() => {
@@ -46,6 +47,7 @@ const Navbar = () => {
             setCurrentUser(response.data);
             setFirstName(response.data.firstName);
             setLastName(response.data.lastName);
+            setUserImage(response.data.image);
             setIsLoading(false);
 
         } catch (error: any) {
@@ -83,9 +85,9 @@ const Navbar = () => {
                         <div className="Navabar__user-img"
                             onClick={() => setActiveMenu(!activeMenu)}
                         >
-                            {currentUser.img !== '' ? (
+                            {userImage !== '' ? (
                                 <Image
-                                    src={currentUser.img}
+                                    src={userImage}
                                     key="user"
                                     alt="user"
                                     fill
@@ -138,11 +140,11 @@ const Navbar = () => {
                                 </div>
                             ) : (
                                 <div >
-                                    <Link href={"/"} className='Navbar__link'><CgProfile />Perfil</Link >
+                                    <Link href={"/"} className='Navbar__link'><CgProfile /></Link >
 
-                                    <Link href={"/"} className='Navbar__link'><BsBookFill />Minhas Receitas</Link >
+                                    <Link href={"/"} className='Navbar__link'><BsBookFill /></Link >
 
-                                    <Link href={"/"} className='Navbar__link'><MdFavorite />Favoritos</Link >
+                                    <Link href={"/"} className='Navbar__link'><MdFavorite /></Link >
 
                                 </div>
                             )

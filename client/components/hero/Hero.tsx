@@ -2,7 +2,7 @@
 
 import React from 'react'
 import './Hero.scss'
-import bg from '../../public/assets/white_green_spacer.svg'
+import bg from '../../public/assets/green_white_spacer.svg'
 
 import { motion } from "framer-motion"
 import Image from 'next/image'

@@ -5,4 +5,5 @@ export interface CustomFilterProps {
     isActive: boolean;
     img: string;
     handleClick: MouseEventHandler<HTMLButtonElement>;
+    delay: number;
 }

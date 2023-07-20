@@ -5,6 +5,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  background-color: var(--main-background-color);
 
   .Hero__container {
     width: 90%;
@@ -72,7 +73,7 @@
       }
     }
   }
-  @media (max-width: 1260px) {
+  @media (max-width: 1401px) {
     .Hero__container {
         align-items: center;
         justify-content: center;
@@ -101,6 +102,7 @@
   }
 
   @media (max-width: 850px) {
+    height: min-content;
     overflow: hidden;
     .Hero__container {
       flex-direction: column;
@@ -109,7 +111,7 @@
       overflow: hidden;
 
       .Hero__left {
-        margin-top: 6rem;
+        margin-top: 2rem;
         align-items: center;
         justify-content: flex-start;
         text-align: center;
@@ -138,12 +140,12 @@
       .Hero__right {
         align-items: center;
         justify-content: flex-start;
-        height: max-content;
-        overflow: hidden;
         width: 100vw;
-        height: max-content;
+        height: min-content;
+        overflow: hidden;
         .Hero__img-container {
-          width: 90%;
+          width: 80%;
+          height: 300px;
           overflow: hidden;
           position: relative;
           margin: 0 auto;
