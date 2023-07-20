@@ -2,6 +2,8 @@
 
 import React from 'react'
 import './Hero.scss'
+import bg from '../../public/assets/white_green_spacer.svg'
+
 import { motion } from "framer-motion"
 import Image from 'next/image'
 const Hero = () => {
@@ -35,15 +37,18 @@ const Hero = () => {
         </div>
         <div className="Hero__right">
           <motion.div
-          whileInView={{ x: [100, 0], opacity: [0, 1] }}
-          transition={{ duration: 1, delay: 1 }}
-          className='Hero__img-container'>
-            <Image src={"/assets/hero-plate.png"} fill className='Hero__img' alt='hero'/>
-          
-          
+            whileInView={{ x: [100, 0], opacity: [0, 1] }}
+            transition={{ duration: 1, delay: 1 }}
+            className='Hero__img-container'>
+            <Image src={"/assets/hero-plate.png"} fill className='Hero__img' alt='hero' />
+
+
           </motion.div>
         </div>
       </div>
+      <div className='spacer ' style={{
+        backgroundImage: `url(${bg.src})`
+      }} />
     </div >
   )
 }

@@ -1,74 +1,154 @@
-.Hero{
-    width: 100%;
-    height: 100vh;
+.Hero {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .Hero__container {
+    width: 90%;
+    height: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: row;
 
-    .Hero__container{
-        width: 90%;
-        height: 100%;
-        display: flex;
-        flex-direction: row;
+    .Hero__left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
 
-        .Hero__left{
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
+      .Hero__title {
+        margin-bottom: 4rem;
+        font-size: 5rem;
+        font-weight: 800;
+        color: var(--secondary-text-color);
+      }
 
-            .Hero__title{
-                margin-bottom: 4rem;
-                font-size: 5rem;
-                font-weight: 800;
-                color: var(--secondary-text-color);
-            }
+      .Hero__text {
+        margin-bottom: 2rem;
+        font-size: 2rem;
+        line-height: 4rem;
+        height: max-content;
 
-            .Hero__text{
-                margin-bottom: 2rem;
-                font-size: 2rem;
-                line-height: 4rem;
-                height: max-content;
-
-                span{
-                    color: var(--secondary-text-color);
-                    font-weight: 800;
-                }
-            }
-            .Hero__btn{
-                width: 18rem;
-                height: 5rem;
-                background-color: var(--primary-text-color);
-                color: white;
-                border: none;
-                border-radius: 5px;
-                font-size: 2rem;
-                font-weight: 600;
-                cursor: pointer;
-                transition: all 0.3s ease-in-out;
-                &:hover{
-                    color: #2fc18c;
-                }
-            }
+        span {
+          color: var(--secondary-text-color);
+          font-weight: 800;
         }
-        .Hero__right{
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            .Hero__img-container{
-                width: 40rem;
-                height: 40rem;
-                position: relative;
-
-                .Hero__img{
-                    width: 100%;
-                    height: 100%;
-                    object-fit: contain;
-                }
-            }
+      }
+      .Hero__btn {
+        width: 18rem;
+        height: 5rem;
+        background-color: var(--primary-text-color);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 2rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        &:hover {
+          color: #2fc18c;
         }
+      }
     }
+    .Hero__right {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .Hero__img-container {
+        width: 40rem;
+        height: 40rem;
+        position: relative;
+
+        .Hero__img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+    }
+  }
+  @media (max-width: 1260px) {
+    .Hero__container {
+        align-items: center;
+        justify-content: center;
+        height: max-content;
+        overflow: hidden;
+      .Hero__left {
+        .Hero__title {
+          margin-bottom: 2rem;
+          font-size: 3rem;
+        }
+
+        .Hero__text {
+          margin-bottom: 1rem;
+          font-size: 1.5rem;
+          line-height: 3rem;
+          height: max-content;
+        }
+        .Hero__btn {
+          width: 10rem;
+          height: 4rem;
+          font-size: 1.5rem;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 850px) {
+    overflow: hidden;
+    .Hero__container {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+
+      .Hero__left {
+        margin-top: 6rem;
+        align-items: center;
+        justify-content: flex-start;
+        text-align: center;
+        flex: 1;
+
+        .Hero__title {
+          margin-bottom: 1rem;
+          font-size: 2rem;
+          font-weight: 900;
+        }
+
+        .Hero__text {
+          margin-bottom: 0.5rem;
+          font-size: 1rem;
+          line-height: 2rem;
+          height: max-content;
+        }
+        .Hero__btn {
+          margin-top: 1rem;
+          width: 50%;
+          height: 3rem;
+          font-size: 1.5rem;
+          font-weight: 600;
+        }
+      }
+      .Hero__right {
+        align-items: center;
+        justify-content: flex-start;
+        height: max-content;
+        overflow: hidden;
+        width: 100vw;
+        height: max-content;
+        .Hero__img-container {
+          width: 90%;
+          overflow: hidden;
+          position: relative;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
 }
