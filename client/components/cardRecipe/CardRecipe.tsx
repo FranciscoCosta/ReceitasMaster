@@ -1,39 +1,46 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import './CardRecipe.scss'
-import Image from 'next/image';
-import { useRouter } from 'next/navigation'
+"use client"
 
-MdTimer
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { MdTimer } from 'react-icons/md';
 import { BsPeopleFill } from 'react-icons/bs';
 import { PiForkKnifeLight } from 'react-icons/pi';
 import { CustomCardRecipeProps } from '@/types';
+import './CardRecipe.scss';
 
-
-const CardRecipe = ({ tumbnail, title, duration, serves, category, id }: CustomCardRecipeProps) => {
+const CardRecipe = ({ tumbnail, title, duration, serves, category, id, handleFavorite }: CustomCardRecipeProps) => {
   const router = useRouter();
+  const [isFavorited, setIsFavorited] = useState(false);
+
+  const handleClick = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+    e.stopPropagation();
+    setIsFavorited(!isFavorited);
+    handleFavorite();
+  };
 
   return (
-    <div className='CardRecipe'
+    <div
+      className="CardRecipe"
       onClick={() => {
-        router.push("/recipes/" + id)
-        router.refresh()
+        router.push("/recipes/" + id);
       }}
-
     >
       <div className="CardRecipe__top">
-        <div className='overlay__bg'> </div>
-        <AiOutlineHeart className='CardRecipe__heart' />
-        <div className='CardRecipe__img'>
-          <Image src={tumbnail} alt={title} layout='fill' objectFit='cover' />
+        <div className="overlay__bg"></div>
+        {isFavorited ? (
+          <AiFillHeart className="CardRecipe__heart" onClick={handleClick} />
+        ) : (
+          <AiOutlineHeart className="CardRecipe__heart" onClick={handleClick} />
+        )}
+        <div className="CardRecipe__img">
+          <Image src={tumbnail} alt={title} layout="fill" objectFit="cover" />
         </div>
       </div>
       <div className="CardRecipe__bottom">
         <div className="CardRecipe__title">
           <h3>{title}</h3>
-
         </div>
         <div className="CardRecipe__info">
           <div className="CardRecipe__info--duration">
@@ -51,7 +58,7 @@ const CardRecipe = ({ tumbnail, title, duration, serves, category, id }: CustomC
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CardRecipe
+export default CardRecipe;

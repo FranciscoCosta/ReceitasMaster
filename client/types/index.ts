@@ -9,14 +9,13 @@ export interface CustomFilterProps {
 }
 
 export interface CustomCardRecipeProps {
-  id: number;
-  title: string;
   tumbnail: string;
-  description: string;
-  handleClick: MouseEventHandler<HTMLButtonElement>;
+  title: string;
   duration: number;
   serves: number;
   category: string;
+  id: number;
+  handleFavorite: () => void;
 }
 
 export interface StatisticsProps {

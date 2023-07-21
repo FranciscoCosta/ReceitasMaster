@@ -87,7 +87,7 @@ const Statistics = () => {
           >A nossa comunidade</motion.h1>
           <motion.p
             whileInView={{ opacity: [0, 1] }}
-            transition={{ duration: 0.5, delay: 0.7 }}
+            transition={{ duration: 1, delay: 0.5 }}
 
           >
             Vamos criar memórias saborosas e espalhar o prazer da cozinha, unidos como uma verdadeira família culinária!
