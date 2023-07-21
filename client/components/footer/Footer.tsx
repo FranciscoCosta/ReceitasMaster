@@ -7,12 +7,16 @@ import './Footer.scss'
 import { FaPhoneAlt, FaPortrait } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import { BsFillGeoAltFill, BsGithub, BsLinkedin } from 'react-icons/bs';
+import { motion } from 'framer-motion';
 
 import Link from 'next/link'
 const Footer = () => {
   return (
     <footer className='Footer'>
-      <div className='Footer__container'>
+      <motion.div
+      whileInView={{ opacity: [0,1] , y: [50,0] }}
+      transition={{ duration: 0.8 , delay: 0.2}}
+      className='Footer__container'>
         <div className='Footer__container__left'>
           <div className='Footer__title'>
             <h1>Master<span>Receita</span></h1>
@@ -79,7 +83,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </footer >
   )
 }

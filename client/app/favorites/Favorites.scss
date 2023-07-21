@@ -1,0 +1,103 @@
+.Favorites {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--main-background-color);
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+
+  .Favorites__container {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    width: 80%;
+    margin: 0 auto;
+    height: 100%;
+    min-height: 100vh;
+
+    h1 {
+      margin-top: 4rem;
+      font-size: 4rem;
+      color: var(--secondary-text-color);
+      margin-bottom: 4rem;
+      font-weight: 900;
+      letter-spacing:2px;
+    }
+
+    h2{
+      text-align: center;
+      width: 100%;
+    }
+    .Favorites__list {
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: start;
+      flex-wrap: wrap;
+      height: 100%;
+      min-height: 100%;
+
+      .Favorites__item {
+        background-color: whitesmoke;
+        margin: 2rem;
+        display: flex;
+        border-radius: 20px;
+        width: 400px;
+        height: 220px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+          rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        background-image: linear-gradient(
+          to top,
+
+          #e4e6f1 0%,
+          #f3f3f3 100%
+        );
+        overflow: hidden;
+        transition: all 0.5s ease-in-out;
+
+        .Favorites__item__image{
+            position: relative;
+            height: 220px;
+            width: 200px;
+        }
+        .Favorite__item-right{
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+            height: 220px;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+
+            .Favorites__item__info{
+                text-align: center;
+
+                h2{
+                    color: var(--secondary-text-color);
+                }
+                p{
+                    margin-top: 0.25rem;
+                    color: var(--primary-color-text);
+                    font-size: 1.2rem;
+                }
+            }
+            .Favorites__item-actions{
+                display: flex;
+                font-size: 1.5rem;
+                gap: 2rem;
+                
+                svg{
+                    cursor: pointer;
+                }
+            }
+        }
+
+
+        &:hover{
+            transform: scale(1.1);
+        }
+      }
+    }
+  }
+}
