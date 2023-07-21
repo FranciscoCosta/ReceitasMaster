@@ -5,5 +5,5 @@ import CustomFilter from "./customFilter";
 import Search from "./search";
 import CardRecipe from "./cardRecipe";
 import Pagination from "./pagination";
-
-export { Navbar, Footer, Hero, Search, CustomFilter, CardRecipe, Pagination };
+import Statistics from "./statistics";
+export { Navbar, Footer, Hero, Search, CustomFilter, CardRecipe, Pagination, Statistics };

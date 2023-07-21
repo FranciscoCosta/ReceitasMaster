@@ -18,3 +18,9 @@ export interface CustomCardRecipeProps {
   serves: number;
   category: string;
 }
+
+export interface StatisticsProps {
+  total_users: number;
+  total_recipes: number;
+  total_reviews: number;
+}
