@@ -51,7 +51,8 @@ const fakeRecipes = [
   },
   {
     id: 5,
-    tumbnail: "https://www.example.com/images/vegetable-stir-fry.jpg",
+    tumbnail:
+      "https://www.cookingclassy.com/wp-content/uploads/2023/01/vegetable-stir-fry-13-730x1095.jpg",
     title: "Vegetable Stir Fry",
     duration: 20,
     serves: 3,
@@ -59,7 +60,8 @@ const fakeRecipes = [
   },
   {
     id: 6,
-    tumbnail: "https://www.example.com/images/chicken-curry.jpg",
+    tumbnail:
+      "https://hips.hearstapps.com/del.h-cdn.co/assets/17/31/1501791674-delish-chicken-curry-horizontal.jpg?crop=0.665xw:0.998xh;0.139xw,0.00240xh&resize=1200:*",
     title: "Chicken Curry",
     duration: 45,
     serves: 4,
@@ -67,7 +69,8 @@ const fakeRecipes = [
   },
   {
     id: 7,
-    tumbnail: "https://www.example.com/images/greek-salad.jpg",
+    tumbnail:
+      "https://www.cookingclassy.com/wp-content/uploads/2023/01/vegetable-stir-fry-13-730x1095.jpg",
     title: "Greek Salad",
     duration: 15,
     serves: 2,
@@ -75,7 +78,8 @@ const fakeRecipes = [
   },
   {
     id: 8,
-    tumbnail: "https://www.example.com/images/beef-burger.jpg",
+    tumbnail:
+      "https://lh3.googleusercontent.com/p/AF1QipNu0uVgZmuwJXoKLfksD_eR25oF5L90YXib2OOW=s680-w680-h510",
     title: "Beef Burger",
     duration: 25,
     serves: 1,
@@ -83,7 +87,8 @@ const fakeRecipes = [
   },
   {
     id: 9,
-    tumbnail: "https://www.example.com/images/pizza-margherita.jpg",
+    tumbnail:
+      "https://anamariabraga.globo.com/wp-content/uploads/2020/08/pizza-margherita-1024x576.jpg",
     title: "Pizza Margherita",
     duration: 35,
     serves: 2,
@@ -419,8 +424,7 @@ function Search() {
                       serves={recipe.serves}
                       category={recipe.categories[0]}
                       id={recipe.id}
-                      handleFavorite={() => handleFavorite(recipe.id)
-                    }
+                      handleFavorite={() => handleFavorite(recipe.id)}
                     />
                   )
                 )

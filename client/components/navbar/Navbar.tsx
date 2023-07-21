@@ -136,7 +136,7 @@ const Navbar = () => {
                                 <div>
                                     <Link href={"/register"} className='Navbar__link'><FaCashRegister /></Link >
                                     <Link href={"/"} className='Navbar__link'><BsBookFill /></Link >
-                                    <Link href={"/"} className='Navbar__link'><MdFavorite /></Link >
+                                    <Link href={"/favorites"} className='Navbar__link'><MdFavorite /></Link >
                                 </div>
                             ) : (
                                 <div >
@@ -144,7 +144,7 @@ const Navbar = () => {
 
                                     <Link href={"/"} className='Navbar__link'><BsBookFill /></Link >
 
-                                    <Link href={"/"} className='Navbar__link'><MdFavorite /></Link >
+                                    <Link href={"/favorites"} className='Navbar__link'><MdFavorite /></Link >
 
                                 </div>
                             )
