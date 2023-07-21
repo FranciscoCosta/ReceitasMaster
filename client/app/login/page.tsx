@@ -35,7 +35,7 @@ function Login() {
                     <p> O sabor da inspiração culinária ao seu alcance!</p>
                 </div>
                 <div className="Login__container-right">
-                    <h1>Login:</h1>
+                    <h1>Entrar</h1>
                     <form>
                         <div className='input__group'>
                             <input

@@ -327,14 +327,19 @@ function Search() {
 
   const handleFavorite = (id: number) => {
     const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
-    if (favorites.includes(id)) {
-      const index = favorites.indexOf(id);
-      favorites.splice(index, 1);
-      localStorage.setItem("favorites", JSON.stringify(favorites));
+
+    const recipeIndex = favorites.findIndex((fav: any) => fav.id === id);
+
+    if (recipeIndex !== -1) {
+      favorites.splice(recipeIndex, 1);
     } else {
-      favorites.push(id);
-      localStorage.setItem("favorites", JSON.stringify(favorites));
+      const recipeFav = recipes.find((recipe) => recipe.id === id);
+
+      if (recipeFav) {
+        favorites.push(recipeFav);
+      }
     }
+    localStorage.setItem("favorites", JSON.stringify(favorites));
   };
 
   return (
@@ -414,7 +419,8 @@ function Search() {
                       serves={recipe.serves}
                       category={recipe.categories[0]}
                       id={recipe.id}
-                      handleFavorite={() => handleFavorite(recipe.id)}
+                      handleFavorite={() => handleFavorite(recipe.id)
+                    }
                     />
                   )
                 )

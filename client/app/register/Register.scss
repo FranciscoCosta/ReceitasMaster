@@ -56,7 +56,7 @@
   
       .Register__container-right {
         flex: 1;
-        background-color: whitesmoke;
+        background-color: var(--main-background-color);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -95,7 +95,7 @@
             }
   
             input:-webkit-autofill {
-              background-color: whitesmoke;
+              background-color: var(--main-background-color);
             }
             input:focus {
               outline: none;
@@ -115,13 +115,13 @@
   
             input:focus ~ label {
               transform: translateY(-5%);
-              background-color: whitesmoke;
+              background-color: var(--main-background-color);
               padding: 0 0.2rem;
               color: var(--secondary-text-color);
             }
             input:not(:placeholder-shown) ~ label {
               transform: translateY(-5%);
-              background-color: whitesmoke;
+              background-color: var(--main-background-color);
               padding: 0 0.2rem;
               color: var(--primary-text-color);
             }

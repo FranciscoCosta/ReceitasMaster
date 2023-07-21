@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
@@ -14,9 +14,18 @@ const CardRecipe = ({ tumbnail, title, duration, serves, category, id, handleFav
   const router = useRouter();
   const [isFavorited, setIsFavorited] = useState(false);
 
+
+  useEffect(() => {
+    const recipeFav = JSON.parse(localStorage.getItem("favorites") || "[]")
+    if (recipeFav.find((recipe: any) => recipe.id === id)) {
+      setIsFavorited(true);
+    }
+  }, [])
+
+
   const handleClick = (e: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     e.stopPropagation();
-    setIsFavorited(!isFavorited);
+    setIsFavorited((prevIsFavorited) => !prevIsFavorited);
     handleFavorite();
   };
 
