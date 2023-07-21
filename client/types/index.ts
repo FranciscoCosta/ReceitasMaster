@@ -9,6 +9,7 @@ export interface CustomFilterProps {
 }
 
 export interface CustomCardRecipeProps {
+  id: number;
   title: string;
   tumbnail: string;
   description: string;

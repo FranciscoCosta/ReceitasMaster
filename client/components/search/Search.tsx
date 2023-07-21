@@ -361,7 +361,7 @@ function Search() {
                         className="Search__recipes-list">
                         {currentCards.length > 0 ? (
                             currentCards.map((recipe: CustomCardRecipeProps, index: number) => (
-                                <CardRecipe tumbnail={recipe.tumbnail} title={recipe.title} duration={recipe.duration} serves={recipe.serves} category={recipe.categories[0]} />
+                                <CardRecipe tumbnail={recipe.tumbnail} title={recipe.title} duration={recipe.duration} serves={recipe.serves} category={recipe.categories[0]} id={recipe.id}/>
                             )))
                             :
                             <div className="Search__recipes-list-empty">
