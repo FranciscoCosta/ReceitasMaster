@@ -1,0 +1,37 @@
+.Pagination {
+  margin-top: 1rem;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: end;
+
+  .Pagination__title {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-left: 1rem;
+    letter-spacing: 1.5px;
+    color: var(--secondary-text-color);
+  }
+  .Page_number {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .button__page{
+        margin: 1rem;
+        width: 30px;
+        height: 30px;
+        border-radius: 5px;
+        border: 1px solid var(--shadow);
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+        rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        cursor: pointer;
+    &.active-page{
+        background-color: var(--main-background-color);
+        border: 1px solid var(--secondary-text-color);    
+    }
+    }
+  }
+}

@@ -7,7 +7,7 @@ import newRequest from '@/utils/newRequest'
 import React, { useState, useEffect } from 'react'
 import { LuSearch } from 'react-icons/lu';
 
-import { CardRecipe, CustomFilter } from '../index';
+import { CardRecipe, CustomFilter, Pagination } from '../index';
 
 import bg from '../../public/assets/white_green_spacer.svg'
 import { CustomCardRecipeProps } from '@/types'
@@ -196,13 +196,20 @@ function Search() {
 
 
     const [recipes, setRecipes] = useState([] as any)
+    const [filteredData, setFilteredData] = useState([] as any);
     const [isLoading, setIsLoading] = useState(true)
+    const [currentPage, setCurrentPage] = useState<number>(1);  
+    const cardsPerPage = 9;
+    const lastCardIndex = currentPage * cardsPerPage;
+    const firstCardIndex = lastCardIndex - cardsPerPage;
+    const currentCards = filteredData.slice(firstCardIndex, lastCardIndex);
 
     const getRecipes = async () => {
         setIsLoading(true)
         // const response = await newRequest.get("/recipes");
         console.log(fakeRecipes)
         setRecipes(fakeRecipes)
+        setFilteredData(fakeRecipes)
 
         // setRecipes(response.data || [])
         setIsLoading(false)
@@ -295,13 +302,19 @@ function Search() {
 
                     {!isLoading && <div className="Search__recipes-list">
                         {
-                            recipes.map((recipe: CustomCardRecipeProps, index: number) => (
+                            currentCards.map((recipe: CustomCardRecipeProps, index: number) => (
                                 <CardRecipe tumbnail={recipe.tumbnail} title={recipe.title} duration={recipe.duration} serves={recipe.serves} category={recipe.categories[0]} as any />
                             ))
 
                         }
                     </div>}
                 </div>
+                <Pagination
+                    cardsPerPage={cardsPerPage}
+                    totalCards={filteredData.length}
+                    setCurrentPage={setCurrentPage}
+                    currentPage={currentPage}
+                />
             </div>
             <div className='spacer ' style={{
                 backgroundImage: `url(${bg.src})`
