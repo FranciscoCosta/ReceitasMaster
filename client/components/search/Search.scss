@@ -95,16 +95,18 @@
       width: 100%;
       gap: 1rem;
       margin-top: 5rem;
+      overflow: hidden;
       .Search__recipes-title {
         margin-left: 1.5rem;
         letter-spacing: 2px;
         font-size: 3rem;
         font-weight: 900;
-        color: var(--primary-text-color);
+        color: var(--secondary-text-color);
       }
       .Search__recipes-text{
         font-size: 1.5rem;
-        font-weight: 500;
+        font-weight: 400;
+        line-height: 2.5rem;
         color: gray;
         width: 500px;
         text-align: center;
@@ -115,6 +117,7 @@
         width: 100%;
         flex-direction: row;
         flex-wrap: wrap;
+        
       }
     }
   }

@@ -191,6 +191,10 @@ const fakeRecipes = [
         categories: ["Salada", "Carne"]
     }
 ]
+interface AnimatedCardProps {
+    y: number;
+    opacity: number;
+}
 function Search() {
 
 
@@ -198,7 +202,9 @@ function Search() {
     const [recipes, setRecipes] = useState([] as any)
     const [filteredData, setFilteredData] = useState([] as any);
     const [isLoading, setIsLoading] = useState(true)
-    const [currentPage, setCurrentPage] = useState<number>(1);  
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [activeFilter, setActiveFilter] = useState("");
+    const [animatedCard, setAnimatedCard] = useState<AnimatedCardProps>({ y: 0, opacity: 1 });
     const cardsPerPage = 9;
     const lastCardIndex = currentPage * cardsPerPage;
     const firstCardIndex = lastCardIndex - cardsPerPage;
@@ -222,8 +228,44 @@ function Search() {
 
 
     const handleClick = (title: string) => {
-        console.log(title)
-    }
+        setActiveFilter(title);
+        setCurrentPage(1);
+        setAnimatedCard([{ y: 100, opacity: 0 }] as unknown as any);
+
+        setTimeout(() => {
+            setAnimatedCard([{ y: 0, opacity: 1 }] as unknown as any);
+
+            if (title === "Peixe") {
+                setFilteredData(recipes.filter((recipe: any) => recipe.categories.includes("Peixe")));
+            }
+            if (title === "Carne") {
+                setFilteredData(recipes.filter((recipe: any) => recipe.categories.includes("Carne")));
+            }
+            if (title === "Vegano") {
+                setFilteredData(
+                    recipes.filter((recipe: any) => recipe.categories.includes("Vegano"))
+                );
+            }
+            if (title === "Sobremesa") {
+                setFilteredData(
+                    recipes.filter((recipe: any) => recipe.categories.includes("Sobremesa"))
+                );
+            }
+            if (title === "Sanduíche") {
+                setFilteredData(
+                    recipes.filter((recipe: any) => recipe.categories.includes("Sanduíche"))
+                );
+            }
+            if (title === "Bebida") {
+                setFilteredData(
+                    recipes.filter((recipe: any) => recipe.categories.includes("Bebida"))
+                );
+            }
+            if (title === "") {
+                setFilteredData(recipes);
+            }
+        }, 500);
+    };
 
     const categories = [
         {
@@ -270,7 +312,7 @@ function Search() {
                         >Categorias</motion.h3>
                         <div className="Search__filters-categories-list">
                             {categories.map((category, index) => (
-                                <CustomFilter title={category.name} img={category.image} delay={index} isActive handleClick={handleClick as any} />
+                                <CustomFilter title={category.name} img={category.image} delay={index} isActive handleClick={() => handleClick(category.name)} />
                             ))}
                         </div>
                     </div>
@@ -300,14 +342,18 @@ function Search() {
                         className='Search__recipes-text'
                     >Transforme sua cozinha em um universo de sabores usando as nossas receitas.</motion.p>
 
-                    {!isLoading && <div className="Search__recipes-list">
+                    {!isLoading && <motion.div 
+                    
+                    animate={animatedCard as unknown as any}
+                    transition={{ duration: 0.5, delayChildren: 0.5 }}
+                    className="Search__recipes-list">
                         {
                             currentCards.map((recipe: CustomCardRecipeProps, index: number) => (
-                                <CardRecipe tumbnail={recipe.tumbnail} title={recipe.title} duration={recipe.duration} serves={recipe.serves} category={recipe.categories[0]} as any />
+                                <CardRecipe tumbnail={recipe.tumbnail} title={recipe.title} duration={recipe.duration} serves={recipe.serves} category={recipe.categories[0]}  />
                             ))
 
                         }
-                    </div>}
+                    </motion.div >}
                 </div>
                 <Pagination
                     cardsPerPage={cardsPerPage}
