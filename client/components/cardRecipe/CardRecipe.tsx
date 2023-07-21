@@ -8,6 +8,8 @@ import { MdTimer } from 'react-icons/md';
 import { BsPeopleFill } from 'react-icons/bs';
 import { PiForkKnifeLight } from 'react-icons/pi';
 import { CustomCardRecipeProps } from '@/types';
+
+import { motion } from 'framer-motion';
 import './CardRecipe.scss';
 
 const CardRecipe = ({ tumbnail, title, duration, serves, category, id, handleFavorite }: CustomCardRecipeProps) => {
@@ -30,7 +32,9 @@ const CardRecipe = ({ tumbnail, title, duration, serves, category, id, handleFav
   };
 
   return (
-    <div
+    <motion.div
+    whileInView={{ opacity: [0,1] }}
+    transition={{ duration: 0.5 , delay: 0.8}}
       className="CardRecipe"
       onClick={() => {
         router.push("/recipes/" + id);
@@ -66,7 +70,7 @@ const CardRecipe = ({ tumbnail, title, duration, serves, category, id, handleFav
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
