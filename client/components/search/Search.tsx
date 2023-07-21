@@ -267,6 +267,18 @@ function Search() {
         }, 500);
     };
 
+    const handleSearch = (text: string) => {
+        const lowerCasedText = text.toLowerCase();
+
+        const matchingRecipes = recipes.filter((recipe: any) =>
+            Object.values(recipe).some((value: any) =>
+                typeof value === 'string' && value.toLowerCase().includes(lowerCasedText)
+            )
+        );
+
+        setFilteredData(matchingRecipes);
+    };
+
     const categories = [
         {
             name: "Peixe",
@@ -325,7 +337,7 @@ function Search() {
                             whileInView={{ opacity: [0, 1] }}
                             transition={{ duration: 0.5, delay: 1.2 }}
                             className="Search__filters-search-input">
-                            <input type="text" placeholder="Procure receitas aqui" />
+                            <input type="text" placeholder="Procure receitas aqui" onChange={(e) => handleSearch(e.target.value)} />
                             <LuSearch className='search-icon' />
                         </motion.div>
                     </div>
@@ -342,15 +354,19 @@ function Search() {
                         className='Search__recipes-text'
                     >Transforme sua cozinha em um universo de sabores usando as nossas receitas.</motion.p>
 
-                    {!isLoading && <motion.div 
-                    
-                    animate={animatedCard as unknown as any}
-                    transition={{ duration: 0.5, delayChildren: 0.5 }}
-                    className="Search__recipes-list">
-                        {
+                    {!isLoading && <motion.div
+
+                        animate={animatedCard as unknown as any}
+                        transition={{ duration: 0.5, delayChildren: 0.5 }}
+                        className="Search__recipes-list">
+                        {currentCards.length > 0 ? (
                             currentCards.map((recipe: CustomCardRecipeProps, index: number) => (
-                                <CardRecipe tumbnail={recipe.tumbnail} title={recipe.title} duration={recipe.duration} serves={recipe.serves} category={recipe.categories[0]}  />
-                            ))
+                                <CardRecipe tumbnail={recipe.tumbnail} title={recipe.title} duration={recipe.duration} serves={recipe.serves} category={recipe.categories[0]} />
+                            )))
+                            :
+                            <div className="Search__recipes-list-empty">
+                                <p>Não encontramos nenhuma receita com esse filtro.</p>
+                            </div>
 
                         }
                     </motion.div >}
