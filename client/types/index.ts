@@ -13,8 +13,9 @@ export interface CustomCardRecipeProps {
   title: string;
   duration: number;
   serves: number;
-  category: string;
+  category?: string;
   id: number;
+  categories?: string[];
   handleFavorite: () => void;
 }
 
@@ -58,5 +59,5 @@ export interface cardReviewProps  {
   rating: number;
   userId : number;
   recipeId : number;
-  createdAt : Date;
+  createdAt : string;
 }

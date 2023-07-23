@@ -187,6 +187,8 @@
     }
     .RecipeDetails__instructions {
       margin-top: 2rem;
+      align-self: flex-start;
+      justify-self: flex-start;
       h2 {
         letter-spacing: 2px;
         font-size: 2.5rem;

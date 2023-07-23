@@ -8,90 +8,76 @@ import bg from "../../../public/assets/green_white_spacer.svg";
 
 import { Rating } from "react-simple-star-rating";
 
+import moment from 'moment';
+
 import { MdTimer } from "react-icons/md";
 import { BsPeopleFill } from "react-icons/bs";
 import { PiForkKnifeLight } from "react-icons/pi";
 import { CardReview } from "@/components";
 
-const fakeDetails: RecipeInterface = {
-  id: 1,
-  title: "Francesinha",
-  description:
-    "Francesinha é uma sanduíche originária da cidade do Porto, em Portugal. A francesinha na sua variação sanduíche francesinha especial é constituída mais habitualmente por linguiça, salsicha fresca, fiambre, carnes frias e bife de carne de vaca, coberta com queijo posteriormente derretido. É guarnecida com um molho à base de tomate, cerveja e piri-piri e pode ser servida com batata frita como acompanhamento. A adição de um ovo estrelado no topo da sanduíche é um facto cada vez mais recorrente, sendo que esta prática constitui uma alteração à receita original. Em algumas casas, a francesinha dita normal serve-se sem bife.",
-  ingredients: [
-    "6 fatias de pão de forma",
-    " 2 unidades de filé bovino",
-    " 8 fatias de queijo",
-    " 2 fatias de presunto",
-    "2 unidades de salsicha",
-    " 2 unidades de linguiça fresca",
-    "2 unidades de ovo frito (opcional)",
-    "2 colheres de sopa de azeite de oliva ou óleo de girassol",
-    "pimenta do reino",
-    " sal",
-  ],
-  categories: ["Carne"],
-  instructions: [
-    "Enquanto cozinha o molho, corte as salsichas e linguiças em metades, no sentido horizontal, e depois ao meio, no sentido vertical. Tempere as linguiças e os filés com sal e pimenta e grelhe na chapa ou frite numa frigideira com óleo.",
-    "Monte a Francesinha à moda do Porto: Torre ligeiramente as fatias de pão e coloque duas fatias em dois pratos. Disponha sobre elas uma fatia de presunto, o bife, outra fatia de pão, as salsichas e as linguiças.",
-    "Tampe com a última fatia de pão e disponha as fatias de queijo, cobrindo a francesinha. Leve a assar no forno preaquecido 200°C até o queijo derreter.",
-    "Finalmente sirva a Francesinha à moda do Porto ainda quente, regada com o molho. Se quiser acrescente ainda no topo um ovo frito e acompanhe com batata frita. Diga o que achou desta receita, e bom apetite!",
-  ],
-  duration: 45,
-  serves: 2,
-  tumbnail:
-    "https://www.pingodoce.pt/wp-content/uploads/2017/09/francesinha.jpg",
-  rating: 4.5,
-  totalRating: 9,
-  totalReviews: 2,
-  userId: 1,
-  createdAt: new Date(),
-  Reviews: [
-    {
-      id: 1,
-      rating: 4,
-      comment: "Muito bom",
-      userId: 2,
-      createdAt: new Date(),
-      recipeId: 1,
-    },
-    {
-      id: 2,
-      rating: 5,
-      comment: "Muito bom comeria de novo",
-      userId: 3,
-      createdAt: new Date(),
-      recipeId: 1,
-    }
-  ],
-};
+import { useParams } from "next/navigation";
 
-const fakeUser = {
-  id: 1,
-  firstName: "João",
-  lastName: "Silva",
-  image:
-    "https://img.freepik.com/free-psd/expressive-man-gesturing_23-2150198916.jpg?w=1380&t=st=1690120433~exp=1690121033~hmac=39db4a5232b300967c30adcf04fe77c57d175e7330cff6cab104045a17ce292d",
-};
+import newRequest from "../../../utils/newRequest";
+
+
 
 const RecipeDetails = () => {
+
+  const { id } = useParams();
+  const [currentUser, setCurrentUser] = useState([] as any);
   const [isloading, setIsloading] = useState(true);
   const [recipe, setRecipe] = useState(null as RecipeInterface | null);
   const [user, setUser] = useState(null as any);
   const [rating, setRating] = useState(0);
+  const [newComment, setNewComment] = useState('');
+  const [reviews, setReviews] = useState([] as any);
+
+
   const handleRating = (rate: number) => {
     setRating(rate);
   };
 
-  const handleNewReview = () => {
-    console.log(rating);
+  const handleNewReview = async () => {
+    const authToken = localStorage.getItem("accessToken") || '';
+    var authTokenClean = authToken.substring(1, authToken.length - 1);
+    const responseMe = await newRequest.get("/users/me", {
+      headers: {
+        Authorization: `Bearer ${authTokenClean}`,
+      },
+      });
+    const userId = responseMe.data.id;
+    const newReview = await newRequest.post(`/reviews/${id}`, {
+      rating: rating,
+      comment: newComment,
+      userId: Number(userId),
+      recipeId: Number(id),
+      headers: {
+        Authorization: `Bearer ${authTokenClean}`,
+      }
+    })
+    getRecipe();
   }
 
   useEffect(() => {
-    setRecipe(fakeDetails);
-    setUser(fakeUser);
-    setIsloading(false);
+    getRecipe();
   }, []);
+
+  const currentUserEmail = typeof window !== "undefined" ? localStorage.getItem("user") || '' : '';
+  const getRecipe = async () => {
+    try {
+      const response = await newRequest.get(`/recipes/${id}`);
+      setRecipe(response.data);
+      const responseReviews = await newRequest.get(`/reviews/${id}`);
+      console.log(responseReviews.data);
+      setReviews(responseReviews.data);
+      const { userId } = response.data
+      const responseUser = await newRequest.get(`/users/${userId}`)
+      setUser(responseUser.data)
+      setIsloading(false)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div className="RecipeDetails">
@@ -124,7 +110,7 @@ const RecipeDetails = () => {
                   <h3>
                     {user?.firstName} {user?.lastName}
                   </h3>
-                  <p>Publicado em {recipe?.createdAt.toLocaleDateString()}</p>
+                  <p>Publicado em {moment.utc(recipe?.createdAt).format("YYYY-MM-DD HH:mm:ss")}</p>
                 </div>
               </div>
               <div className="separator" />
@@ -216,9 +202,9 @@ const RecipeDetails = () => {
             <div className="RecipeDetails__reviews-container">
               <h2>Avaliações</h2>
               <div className="Reviews__display">
-                {recipe?.Reviews.map((review) => {
+                {reviews.map((review) => {
                   return (
-                    <CardReview comment={review.comment} rating={review.rating} userId={review.userId} recipeId={review.recipeId} createdAt={review.createdAt} />
+                    <CardReview comment={review.comment} rating={review.rating} userId={review.userId} recipeId={review.recipeId} createdAt={moment.utc(review?.createdAt).format("YYYY-MM-DD HH:mm:ss")} />
 
                   );
                 }
@@ -227,12 +213,12 @@ const RecipeDetails = () => {
             </div>
             <div className="RecipeDetails__reviews-add">
               <h2>Adicionar avaliação</h2>
-              <div className="Reviews__add-container">
+              {currentUserEmail !== '' ? <div className="Reviews__add-container">
                 <div className="Reviews__add-container__rating">
                   <Rating size={25} stars={5} onClick={handleRating} initialValue={rating} />
                 </div>
                 <div className="Reviews__add-container__comment">
-                  <textarea placeholder="Deixe seu comentário" />
+                  <textarea placeholder="Deixe seu comentário" onChange={(e) => setNewComment(e.target.value)} />
                 </div>
                 <div className="Reviews__add-container__submit">
                   <button
@@ -240,6 +226,10 @@ const RecipeDetails = () => {
                   >Enviar</button>
                 </div>
               </div>
+                :
+                <p>Inicie sessão para deixar a sua avaliação.</p>
+
+              }
             </div>
           </div>
         </div>

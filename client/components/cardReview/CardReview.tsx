@@ -9,15 +9,10 @@ import Image from 'next/image';
 import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
 
 import './CardReview.scss';
+import newRequest from '../../utils/newRequest';
+import getMe from '../../utils/getMe';
 
  
-const fakeReviewUser = {
-    id: 2,
-    firstName: "Maria",
-    lastName: "Silva",
-    image:
-        "https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=1380&t=st=1690120465~exp=1690121065~hmac=f921e87181b32d7ca87b245b4cd0b3f5ac035e536ea8d670b8448dc33f8ae4f6",
-};
 
 const CardReview = ({
     comment,
@@ -26,16 +21,27 @@ const CardReview = ({
     createdAt
 }: cardReviewProps) => {
 
-    // const currentUser = localStorage.getItem('currentUser') || [];
-    const currentUser = {};
-    currentUser.id = 2;
+    
     const [isloading, setIsloading] = useState(true);
     const [reviewUser, setReviewUser] = useState(null as any);
-
+    const [currentUser, setCurrentUser] = useState<any>({});
     useEffect(() => {
-        setReviewUser(fakeReviewUser);
-        setIsloading(false);
+        getReviewUser();
     }, []);
+    
+
+    const getReviewUser = async () => {
+        try {
+            const currentUser = await getMe();
+            setCurrentUser(currentUser);
+            const response = await newRequest.get(`/users/${userId}`);
+            setReviewUser(response.data);
+            setIsloading(false);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
 
     return (
         <div className='CardReview'>
@@ -63,7 +69,7 @@ const CardReview = ({
                                 </div>
                                 <div className='CardReview__header__info__user__name'>
                                     <h3>{reviewUser?.firstName} {reviewUser?.lastName}</h3>
-                                    <h4>{createdAt.toLocaleDateString()}</h4>
+                                    <h4>{createdAt}</h4>
                                 </div>
                             </div>
                             { currentUser.id ===  userId && <div className='owner__review'>
