@@ -51,3 +51,12 @@ export interface Review {
   createdAt: Date;
   updatedAt: Date;
 }
+
+
+export interface cardReviewProps  {
+  comment: string;
+  rating: number;
+  userId : number;
+  recipeId : number;
+  createdAt : Date;
+}

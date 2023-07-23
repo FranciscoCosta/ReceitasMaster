@@ -6,6 +6,7 @@ import bg from '../../public/assets/green_white_spacer.svg'
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import Link from 'next/link';
 
 function Register() {
     const [email, setEmail] = useState<string>('');
@@ -125,6 +126,8 @@ function Register() {
                         </div>
 
                     </form>
+                    <p>Já não possui conta ?</p>
+                    <Link href={"/login"}>Entre aqui</Link>
                     <button className='Register-btn' type='submit' onClick={handleSubmit}> Entrar </button>
                     {
                         error && <p className='error'>{error}</p>

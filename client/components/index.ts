@@ -6,4 +6,16 @@ import Search from "./search";
 import CardRecipe from "./cardRecipe";
 import Pagination from "./pagination";
 import Statistics from "./statistics";
-export { Navbar, Footer, Hero, Search, CustomFilter, CardRecipe, Pagination, Statistics };
+import CardReview from "./cardReview";
+
+export {
+  Navbar,
+  Footer,
+  Hero,
+  Search,
+  CustomFilter,
+  CardRecipe,
+  Pagination,
+  Statistics,
+  CardReview,
+};

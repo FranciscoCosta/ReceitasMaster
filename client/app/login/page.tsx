@@ -2,9 +2,10 @@
 
 import './Login.scss'
 import newRequest from '../../utils/newRequest'
-import bg from '../../../public/assets/green_white_spacer.svg'
+import bg from '../../public/assets/green_white_spacer.svg'
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import Link from 'next/link';
 
 function Login() {
     const [email, setEmail] = useState<string>('');
@@ -59,6 +60,8 @@ function Login() {
                         </div>
 
                     </form>
+                    <p>Ainda não possui conta ?</p>
+                    <Link href={"/register"}>Casdastre aqui</Link>
                     <button className='Login-btn' type='submit' onClick={handleSubmit}> Entrar </button>
                     {
                         error && <p className='error'>{error}</p>

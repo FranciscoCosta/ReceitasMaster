@@ -1,0 +1,65 @@
+.CardReview {
+    margin-top: 1rem;
+  .CardReview__container {
+    margin-left: 1rem;
+
+    .CardReview__header {
+        
+        .CardReview__header__info {
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1rem;
+        display: flex;
+        flex-direction: row;
+
+        .owner__review{
+          display: flex;
+          gap: 1rem;
+          align-self: flex-start;
+          margin-top: 1rem;
+
+          svg{
+            cursor: pointer;
+          }
+        }
+        .CardReview__header__info__user{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            .CardReview__user-img{
+                border: 1px solid var(--shadow);
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                position: relative;
+            }
+            .CardReview__header__info__user__name{
+                h3{
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                    color: rgb(22, 22, 22);
+                }
+                h4{
+                    font-size: 1rem;
+                    font-weight: 600;
+                    color: rgb(121, 121, 121);
+                }
+            }
+        }
+      }
+    }
+    .CardReview__header__rating{
+        margin-top: 0.5rem;
+    }
+    .CardReview__body {
+      p{
+        font-size: 1.2em;
+        font-weight: 400;
+        line-height: 2.2rem;
+        color: var(--primary-text-color)
+      }
+    }
+  }
+}

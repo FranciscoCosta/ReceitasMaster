@@ -11,6 +11,7 @@ import { Rating } from "react-simple-star-rating";
 import { MdTimer } from "react-icons/md";
 import { BsPeopleFill } from "react-icons/bs";
 import { PiForkKnifeLight } from "react-icons/pi";
+import { CardReview } from "@/components";
 
 const fakeDetails: RecipeInterface = {
   id: 1,
@@ -40,9 +41,9 @@ const fakeDetails: RecipeInterface = {
   serves: 2,
   tumbnail:
     "https://www.pingodoce.pt/wp-content/uploads/2017/09/francesinha.jpg",
-  rating: 4,
-  totalRating: 4,
-  totalReviews: 1,
+  rating: 4.5,
+  totalRating: 9,
+  totalReviews: 2,
   userId: 1,
   createdAt: new Date(),
   Reviews: [
@@ -52,7 +53,16 @@ const fakeDetails: RecipeInterface = {
       comment: "Muito bom",
       userId: 2,
       createdAt: new Date(),
+      recipeId: 1,
     },
+    {
+      id: 2,
+      rating: 5,
+      comment: "Muito bom comeria de novo",
+      userId: 3,
+      createdAt: new Date(),
+      recipeId: 1,
+    }
   ],
 };
 
@@ -64,18 +74,18 @@ const fakeUser = {
     "https://img.freepik.com/free-psd/expressive-man-gesturing_23-2150198916.jpg?w=1380&t=st=1690120433~exp=1690121033~hmac=39db4a5232b300967c30adcf04fe77c57d175e7330cff6cab104045a17ce292d",
 };
 
-const fakeReviewUser = {
-  id: 2,
-  firstName: "Maria",
-  lastName: "Silva",
-  image:
-    "https://img.freepik.com/free-photo/portrait-dark-skinned-cheerful-woman-with-curly-hair-touches-chin-gently-laughs-happily-enjoys-day-off-feels-happy-enthusiastic-hears-something-positive-wears-casual-blue-turtleneck_273609-43443.jpg?w=1380&t=st=1690120465~exp=1690121065~hmac=f921e87181b32d7ca87b245b4cd0b3f5ac035e536ea8d670b8448dc33f8ae4f6",
-};
-
 const RecipeDetails = () => {
   const [isloading, setIsloading] = useState(true);
   const [recipe, setRecipe] = useState(null as RecipeInterface | null);
   const [user, setUser] = useState(null as any);
+  const [rating, setRating] = useState(0);
+  const handleRating = (rate: number) => {
+    setRating(rate);
+  };
+
+  const handleNewReview = () => {
+    console.log(rating);
+  }
 
   useEffect(() => {
     setRecipe(fakeDetails);
@@ -208,50 +218,27 @@ const RecipeDetails = () => {
               <div className="Reviews__display">
                 {recipe?.Reviews.map((review) => {
                   return (
-                    <div className="Review__item">
-                      <div className="Review__item__user">
-                        <div className="Review__user-img">
-                          {fakeReviewUser?.image ? (
-                            <Image
-                              src={fakeReviewUser?.image as string}
-                              alt="user-pic"
-                              fill
-                              objectFit="cover"
-                            />
-                          ) : (
-                            <Image
-                              src="/assets/profile.png"
-                              alt="user-pic"
-                              fill
-                              objectFit="cover"
-                            />
-                          )}
-                        </div>
-                        <div className="Review__user-info">
-                          <h3>
-                            {fakeReviewUser?.firstName}{" "}
-                            {fakeReviewUser?.lastName}
-                          </h3>
-                          <p>
-                            {review.createdAt.toLocaleDateString()}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="Review__item__rating">
-                        <Rating
-                          size={25}
-                          initialValue={review.rating}
-                          stars={5}
-                          readonly
-                        />
-                      </div>
-                      <div className="Review__item__comment">
-                        <p>{review.comment}</p>
-                      </div>
-                    </div>
+                    <CardReview comment={review.comment} rating={review.rating} userId={review.userId} recipeId={review.recipeId} createdAt={review.createdAt} />
+
                   );
                 }
                 )}
+              </div>
+            </div>
+            <div className="RecipeDetails__reviews-add">
+              <h2>Adicionar avaliação</h2>
+              <div className="Reviews__add-container">
+                <div className="Reviews__add-container__rating">
+                  <Rating size={25} stars={5} onClick={handleRating} initialValue={rating} />
+                </div>
+                <div className="Reviews__add-container__comment">
+                  <textarea placeholder="Deixe seu comentário" />
+                </div>
+                <div className="Reviews__add-container__submit">
+                  <button
+                    onClick={handleNewReview}
+                  >Enviar</button>
+                </div>
               </div>
             </div>
           </div>
