@@ -60,4 +60,6 @@ export interface cardReviewProps  {
   userId : number;
   recipeId : number;
   createdAt : string;
+  reviewId : number;
+  getRecipe : () => void;
 }

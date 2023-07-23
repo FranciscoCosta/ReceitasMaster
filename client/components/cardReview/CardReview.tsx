@@ -6,30 +6,41 @@ import { Rating } from 'react-simple-star-rating';
 import Image from 'next/image';
 
 
-import { AiFillEdit, AiFillDelete } from 'react-icons/ai';
+import { AiFillDelete } from 'react-icons/ai';
 
 import './CardReview.scss';
 import newRequest from '../../utils/newRequest';
 import getMe from '../../utils/getMe';
 
- 
+
 
 const CardReview = ({
     comment,
     rating,
     userId,
-    createdAt
+    createdAt,
+    reviewId,
+    getRecipe,
 }: cardReviewProps) => {
 
-    
+
     const [isloading, setIsloading] = useState(true);
     const [reviewUser, setReviewUser] = useState(null as any);
     const [currentUser, setCurrentUser] = useState<any>({});
     useEffect(() => {
         getReviewUser();
     }, []);
-    
 
+    const handleDelete = async () => {
+        const authToken = localStorage.getItem("accessToken") || '';
+        var authTokenClean = authToken.substring(1, authToken.length - 1);
+        const response = await newRequest.delete(`/reviews/${reviewId}`, {
+            headers: {
+                Authorization: `Bearer ${authTokenClean}`,
+            }
+        });
+        getRecipe();
+    }
     const getReviewUser = async () => {
         try {
             const currentUser = await getMe();
@@ -72,9 +83,8 @@ const CardReview = ({
                                     <h4>{createdAt}</h4>
                                 </div>
                             </div>
-                            { currentUser.id ===  userId && <div className='owner__review'>
-                                <AiFillEdit size={20} color="green"/>
-                                <AiFillDelete size={20} color='crimson'/>
+                            {currentUser.id === userId && <div className='owner__review'>
+                                <AiFillDelete size={20} color='crimson' onClick={() => handleDelete()} />
                             </div>}
                         </div>
                         <div className='CardReview__header__rating'>

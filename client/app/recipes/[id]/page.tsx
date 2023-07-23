@@ -110,7 +110,7 @@ const RecipeDetails = () => {
                   <h3>
                     {user?.firstName} {user?.lastName}
                   </h3>
-                  <p>Publicado em {moment.utc(recipe?.createdAt).format("YYYY-MM-DD HH:mm:ss")}</p>
+                  <p>Publicado em {moment.utc(recipe?.createdAt).format("YYYY-MM-DD")}</p>
                 </div>
               </div>
               <div className="separator" />
@@ -202,9 +202,9 @@ const RecipeDetails = () => {
             <div className="RecipeDetails__reviews-container">
               <h2>Avaliações</h2>
               <div className="Reviews__display">
-                {reviews.map((review) => {
+                {reviews.map((review : any) => {
                   return (
-                    <CardReview comment={review.comment} rating={review.rating} userId={review.userId} recipeId={review.recipeId} createdAt={moment.utc(review?.createdAt).format("YYYY-MM-DD HH:mm:ss")} />
+                    <CardReview comment={review.comment} reviewId={review.id} rating={review.rating} userId={review.userId} getRecipe={getRecipe} recipeId={review.recipeId} createdAt={moment.utc(review?.createdAt).format("YYYY-MM-DD")} />
 
                   );
                 }
