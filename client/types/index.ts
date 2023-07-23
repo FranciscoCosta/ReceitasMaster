@@ -23,3 +23,31 @@ export interface StatisticsProps {
   total_recipes: number;
   total_reviews: number;
 }
+
+export interface RecipeInterface {
+  id: number;
+  title: string;
+  description: string;
+  ingredients: string[];
+  categories: string[];
+  instructions: string[];
+  duration: number;
+  serves: number;
+  tumbnail: string;
+  rating: number;
+  totalRating: number;
+  totalReviews: number;
+  userId: number;
+  createdAt: Date;
+  Reviews: Review[];
+}
+
+export interface Review {
+  id: number;
+  rating: number;
+  comment: string;
+  userId: number;
+  recipeId: number;
+  createdAt: Date;
+  updatedAt: Date;
+}

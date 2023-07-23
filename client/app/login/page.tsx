@@ -2,8 +2,7 @@
 
 import './Login.scss'
 import newRequest from '../../utils/newRequest'
-import bg from '../../public/assets/green_white_spacer.svg'
-
+import bg from '../../../public/assets/green_white_spacer.svg'
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
