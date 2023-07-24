@@ -9,7 +9,6 @@ import './MyRecipes.scss';
 import bg from '../../public/assets/green_white_spacer.svg'
 import Image from 'next/image';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
-import axios from 'axios';
 
 const MyRecipes = () => {
 
@@ -31,6 +30,7 @@ const MyRecipes = () => {
   const [description, setdescription] = useState('');
   const [duration, setduration] = useState('');
   const [serves, setserves] = useState('');
+  const [recipeEditId, setRecipeEditId] = useState(0);
 
   useEffect(() => {
     if (currentUserEmail === '') {
@@ -70,22 +70,7 @@ const MyRecipes = () => {
     }
   }
 
-  const handleEdit = async (id: number) => {
-    try {
-      const authToken = localStorage.getItem("accessToken") || '';
-      var authTokenClean = authToken.substring(1, authToken.length - 1);
-      await newRequest.get(`/recipes/${id}`, {
-        headers: {
-          Authorization: `Bearer ${authTokenClean}`,
-        },
-      });
-    } catch (error: any) {
-      console.log(error);
-    }
-  }
-
   const handleSubmit = async () => {
-    console.log(duration,serves)
     const authToken = localStorage.getItem("accessToken") || '';
     var authTokenClean = authToken.substring(1, authToken.length - 1);
     const user = await getMe();
@@ -106,9 +91,41 @@ const MyRecipes = () => {
           Authorization: `Bearer ${authTokenClean}`,
         },
       });
-      console.log(response);
-      router.push('/myrecipes');
       setIsAddRecipeModalOpen(false);
+      router.push('/');
+    } catch (error: any) {
+      console.log(error);
+    }
+  }
+
+  const handleEditModal = async (id: number) => {
+    setRecipeEditId(id);
+    setIsEditRecipeModalOpen(true);
+  }
+
+  const handleEdit = async () => {
+    const authToken = localStorage.getItem("accessToken") || '';
+    var authTokenClean = authToken.substring(1, authToken.length - 1);
+    const user = await getMe();
+    const updatedRecipe = {};
+    if (title) updatedRecipe.title = title;
+    if (description) updatedRecipe.description = description;
+    if (duration) updatedRecipe.duration = Number(duration);
+    if (serves) updatedRecipe.serves = Number(serves);
+    if (category) updatedRecipe.categories = [category];
+    if (imgUrl) updatedRecipe.tumbnail = imgUrl;
+    if (addIngridients.length > 0) updatedRecipe.ingredients = addIngridients;
+    if (addInstructions.length > 0) updatedRecipe.instructions = addInstructions;
+
+    try {
+      const response = await newRequest.patch(`/recipes/${recipeEditId}`, updatedRecipe, {
+        headers: {
+          Authorization: `Bearer ${authTokenClean}`,
+        },
+      });
+
+      setIsEditRecipeModalOpen(false);
+      router.push('/');
     } catch (error: any) {
       console.log(error);
     }
@@ -183,7 +200,7 @@ const MyRecipes = () => {
                       <td>{recipe.duration}</td>
                       <td>{recipe.serves}</td>
                       <td className="MyRecipes__actions">
-                        <AiFillEdit color='green' size={25} onClick={() => handleEdit(recipe.id)} />
+                        <AiFillEdit color='green' size={25} onClick={() => handleEditModal(recipe.id)} />
                         <AiFillDelete color='crimson' size={25} onClick={() => handleDelete(recipe.id)} />
                       </td>
                     </tr>
@@ -257,6 +274,121 @@ const MyRecipes = () => {
                 <label htmlFor="">Serve quantas pessoas:</label>
                 <input
                   required
+                  type="number"
+                  name="serves"
+                  placeholder="ex: 2"
+                  required
+                  onChange={(e) => setserves(e.target.value)}
+                />
+                <label htmlFor="">Adicionar ingredientes</label>
+                <input type="text" placeholder="ex: Tomate" onChange={(e) => setIngridient(e.target.value)} />
+                <button type="button" onClick={() => handleAddIngridient()}>Adicionar</button>
+
+                <div className="addedIngredientes">
+                  {addIngridients?.map((f) => (
+                    <div className="item" key={f}>
+                      <button
+                        onClick={() =>
+                          setaddIngridients(
+                            addIngridients.filter((i) => i !== f)
+                          )
+                        }
+                      >
+                        {f}
+                        <span>X</span>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <label htmlFor="">Adicionar instruções</label>
+                <input type="text" placeholder="ex: Ligar o forno" onChange={(e) => setInstruction(e.target.value)} />
+                <button type="button" onClick={() => handleAddInstruction()}>Adicionar</button>
+
+                <div className="addedInstructions">
+                  {addInstructions?.map((f) => (
+                    <div className="item" key={f}>
+                      <button
+                        onClick={() =>
+                          setaddInstructions(
+                            addInstructions.filter((i) => i !== f)
+                          )
+                        }
+                      >
+                        {f}
+                        <span>X</span>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </dialog>
+      <dialog open={isEditRecipeModalOpen} className='MyRecipes__modal'>
+        <div className="MyRecipes__modal__container">
+          <h1>Editar receita</h1>
+          <form>
+            <div className="sections">
+              <div className="info">
+                <label htmlFor="">Título</label>
+                <input
+                  type="text"
+                  name="title"
+                  placeholder="ex: Massa carbonara"
+                  onChange={(e) => settitle(e.target.value)}
+
+                />
+                <label htmlFor="">Categoria</label>
+                <select name="category" id="category" onChange={(e) => setcategory(e.target.value)} >
+                  <option value="Peixe">Peixe</option>
+                  <option value="Carne">Carne</option>
+                  <option value="Vegano">Vegano</option>
+                  <option value="Sobremesa">Sobremesa</option>
+                  <option value="Sanduíche">Sanduíche</option>
+                  <option value="Bebida">Bebida</option>
+                </select>
+                <div className="images">
+                  <div className="imagesInputs">
+                    <label htmlFor="">Carregar imagem</label>
+                    <input
+
+                      type="file"
+                      name='file'
+                      onChange={(e) => setFile(e.target.files[0])}
+                    />
+                  </div>
+                  <button type="button" onClick={handleUpload}>
+                    {uploading ? "carregando..." : "Carregar"}
+                  </button>
+                </div>
+                <label htmlFor="">Descrição</label>
+                <textarea
+                  name="description"
+                  id=""
+
+                  placeholder="Fala um pouco sobre a receita"
+                  cols="0"
+                  rows="10"
+                  onChange={(e) => setdescription(e.target.value)}
+                ></textarea>
+                <button type="button" onClick={handleEdit}>Editar</button>
+              </div>
+            </div>
+            <div className="details">
+              <label htmlFor="">Duração em minutos:</label>
+              <input
+
+                type="number"
+                name="duration"
+                placeholder="ex: 30"
+
+                onChange={(e) => setduration(e.target.value)}
+              />
+              <div className="details">
+                <label htmlFor="">Serve quantas pessoas:</label>
+                <input
+
                   type="number"
                   name="serves"
                   placeholder="ex: 2"

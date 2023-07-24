@@ -32,4 +32,12 @@ export class EditRecipeDto {
 
   @IsOptional()
   reviews?: Review[];
+
+  @IsOptional()
+  @IsNumber()
+  duration?: number;
+
+  @IsOptional()
+  @IsNumber()
+  servings?: number;
 }
