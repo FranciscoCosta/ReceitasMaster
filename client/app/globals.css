@@ -83,3 +83,10 @@
 .NotFound-img{
   object-fit: contain;
 }
+
+.Loader{
+  margin: 0 auto;
+  width: 50vw;
+  height: 50vh;
+  background-color: white;
+}
