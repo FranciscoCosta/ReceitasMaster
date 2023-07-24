@@ -165,7 +165,7 @@ const RecipeDetails = () => {
             </div>
           </div>
           <div className="RecipeDetails__avaliation">
-            {recipe?.rating !== 0 ? (
+            {recipe?.rating !== null ? (
               <div className="stars-container">
                 <Rating
                   size={25}

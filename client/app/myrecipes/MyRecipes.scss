@@ -1,0 +1,175 @@
+.MyRecipes {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  background-color: var(--main-background-color);
+
+  .MyRecipes__container {
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    flex-direction: column;
+
+    .MyRecipes__header {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 2rem;
+
+      h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin: 0;
+      }
+      button {
+        background-color: #f2f2f2;
+        border: none;
+        border-radius: 5px;
+        padding: 1rem 2rem;
+        font-size: 1.5rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        &:hover {
+          background-color: #e2e2e2;
+        }
+      }
+    }
+
+    .Myrecipes__body {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      width: 100%;
+
+      table {
+        width: 100%;
+
+        tr {
+          height: 50px;
+          th {
+            text-align: left;
+            width: 200px;
+            font-size: 1.5rem;
+          }
+          td {
+            width: 200px;
+            text-align: left;
+            font-size: 1.2rem;
+            font-weight: 500;
+            svg {
+              cursor: pointer;
+              margin-left: 1rem;
+            }
+          }
+          &:nth-child(even) {
+            background-color: #1dbf730f;
+          }
+        }
+      }
+    }
+  }
+
+  dialog {
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    z-index: 999;
+    border: none;
+    .MyRecipes__modal__container {
+      width: 80%;
+      background-color: white;
+      margin: 0 auto;
+      padding: 1rem;
+      border: 3px solid black;
+      form {
+        display: flex;
+        flex-direction: row;
+        gap: 4rem;
+        .sections {
+          flex: 1;
+          display: flex;
+          justify-content: space-between;
+          gap: 1rem;
+
+          label {
+            color: gray;
+            font-size: 18px;
+          }
+
+        }
+        .info,
+        .details {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          justify-content: flex-start ;
+
+          input,
+          select,
+          textarea {
+            padding: 20px;
+          }
+
+          .images {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            .imagesInputs {
+              display: flex;
+              flex-direction: column;
+              gap: 20px;
+            }
+          }
+
+          button {
+            border: none;
+            padding: 20px;
+            color: white;
+            font-weight: 500;
+            font-size: 18px;
+            background-color: #1dbf73;
+            cursor: pointer;
+          }
+
+          .add {
+            display: flex;
+            justify-content: flex-start;
+
+            input {
+              width: 80%;
+            }
+          }
+
+          .addedIngredientes, .addedInstructions{
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            
+
+            button {
+              height: 30px;
+              font-size: 12px;
+              font-weight: 400;
+              background: transparent;
+              color: red;
+              border: 1px solid red;
+              display: flex;
+              align-items: center;
+              gap: 20px;
+              overflow: hidden;
+            }
+          }
+        }
+
+      }
+    }
+  }
+}

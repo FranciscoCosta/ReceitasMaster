@@ -30,8 +30,13 @@ export class CreateRecipeDto {
   @IsOptional()
   rating?: number;
 
-  @IsOptional()
-  reviews?: Review[];
+  @IsNumber()
+  @IsNotEmpty()
+  duration: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  serves: number;
 
   userId: number;
 }

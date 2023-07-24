@@ -16,6 +16,7 @@ interface AnimatedCardProps {
   y: number;
   opacity: number;
 }
+
 function Search() {
   const [recipes, setRecipes] = useState([] as any);
   const [filteredData, setFilteredData] = useState([] as any);
@@ -35,9 +36,7 @@ function Search() {
     setIsLoading(true);
     const response = await newRequest.get("/recipes");
     setRecipes(response.data || []);
-    setFilteredData(response.data);
-
-    // setRecipes(response.data || [])
+    setFilteredData(response.data || []);
     setIsLoading(false);
   };
 
@@ -95,15 +94,30 @@ function Search() {
 
   const handleSearch = (text: string) => {
     const lowerCasedText = text.toLowerCase();
-
-    const matchingRecipes = recipes.filter((recipe: any) =>
-      Object.values(recipe).some(
+    console.log(lowerCasedText);
+    const matchingRecipes = recipes.filter((recipe: any) => {
+      const hasMatchingProperty = Object.values(recipe).some(
         (value: any) =>
           typeof value === "string" &&
           value.toLowerCase().includes(lowerCasedText)
-      )
-    );
+      );
 
+      const hasMatchingIngredient = recipe.ingredients.some(
+        (ingredient: string) =>
+          ingredient.toLowerCase().includes(lowerCasedText)
+      );
+
+      const hasMatchingInstruction = recipe.instructions.some(
+        (instruction: string) =>
+          instruction.toLowerCase().includes(lowerCasedText)
+      );
+
+      return (
+        hasMatchingProperty || hasMatchingIngredient || hasMatchingInstruction
+      );
+    });
+
+    console.log(matchingRecipes);
     setFilteredData(matchingRecipes);
   };
 
@@ -128,7 +142,6 @@ function Search() {
       image: "/assets/Dessert.png",
       handleClick: () => handleClick("Sobremesa"),
     },
-
     {
       name: "Sanduíche",
       image: "/assets/sandwich.png",
@@ -172,6 +185,7 @@ function Search() {
             <div className="Search__filters-categories-list">
               {categories.map((category, index) => (
                 <CustomFilter
+                  key={index}
                   title={category.name}
                   img={category.image}
                   delay={index}
@@ -219,7 +233,7 @@ function Search() {
             receitas.
           </motion.p>
 
-          {!isLoading && (
+          {!isLoading && recipes.length !== 0 ? (
             <motion.div
               animate={(animatedCard as unknown) as any}
               transition={{ duration: 0.5, delayChildren: 0.5 }}
@@ -229,6 +243,7 @@ function Search() {
                 currentCards.map(
                   (recipe: CustomCardRecipeProps, index: number) => (
                     <CardRecipe
+                      key={index}
                       tumbnail={recipe.tumbnail}
                       title={recipe.title}
                       duration={recipe.duration}
@@ -245,6 +260,8 @@ function Search() {
                 </div>
               )}
             </motion.div>
+          ) : (
+            <div>Carregando...</div>
           )}
         </div>
         <Pagination

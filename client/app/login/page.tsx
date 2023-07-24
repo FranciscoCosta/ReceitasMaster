@@ -31,7 +31,7 @@ function Login() {
         <div className="Login">
             <div className="Login__container">
                 <div className="Login__container-left">
-                    <h1>Receita<span>Master</span></h1>
+                    <h1>Master<span>Receita</span></h1>
                     <p> O sabor da inspiração culinária ao seu alcance!</p>
                 </div>
                 <div className="Login__container-right">

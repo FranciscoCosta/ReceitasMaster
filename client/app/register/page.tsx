@@ -65,7 +65,7 @@ function Register() {
         <div className="Register">
             <div className="Register__container">
                 <div className="Register__container-left">
-                    <h1>Receita<span>Master</span></h1>
+                    <h1>Master<span>Receita</span></h1>
                     <p> O sabor da inspiração culinária ao seu alcance!</p>
                 </div>
                 <div className="Register__container-right">

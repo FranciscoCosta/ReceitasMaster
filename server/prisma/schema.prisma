@@ -34,9 +34,9 @@ model Recipe {
   ingredients  String[]
   instructions String[]
   categories   String[]
-  duration     String
-  serves       String
-  tumbnail     String?
+  duration     Int
+  serves       Int
+  tumbnail     String?  
   rating       Float?
   totalRating  Int?
   totalReviews Int?

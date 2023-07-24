@@ -17,15 +17,15 @@ import { useRouter } from 'next/navigation'
 
 
 const Navbar = () => {
+    const currentUserEmail = typeof window !== "undefined" ? localStorage.getItem("user") || '' : '';
     const [currentUser, setCurrentUser] = useState<any>({});
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [firstName, setFirstName] = useState<string>('');
     const [lastName, setLastName] = useState<string>('');
     const [userImage, setUserImage] = useState<string>('');
-    const currentUserEmail = typeof window !== "undefined" ? localStorage.getItem("user") || '' : '';
 
     useEffect(() => {
-        if (currentUserEmail) {
+        if (currentUserEmail !== '') {
             getUser();
         }
         setIsLoading(false);
@@ -47,7 +47,7 @@ const Navbar = () => {
             setCurrentUser(response.data);
             setFirstName(response.data.firstName);
             setLastName(response.data.lastName);
-            setUserImage(response.data.image);
+            setUserImage(response.data.image || '');
             setIsLoading(false);
 
         } catch (error: any) {
@@ -74,7 +74,7 @@ const Navbar = () => {
                         <h1><span>Master</span>Receita</h1>
                     </div>
                 </div>
-                {!isLoading && <div className='Navbar__right'>
+                {!isLoading && currentUser.lenght !==0  && <div className='Navbar__right'>
                     <div className='Navbar__user-name'>
 
                         {firstName && (
@@ -142,7 +142,7 @@ const Navbar = () => {
                                 <div >
                                     <Link href={"/"} className='Navbar__link'><CgProfile /></Link >
 
-                                    <Link href={"/"} className='Navbar__link'><BsBookFill /></Link >
+                                    <Link href={"/myrecipes"} className='Navbar__link'><BsBookFill /></Link >
 
                                     <Link href={"/favorites"} className='Navbar__link'><MdFavorite /></Link >
 
@@ -155,5 +155,4 @@ const Navbar = () => {
         </nav >
     )
 }
-
 export default Navbar;
