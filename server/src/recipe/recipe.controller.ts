@@ -19,6 +19,12 @@ import { GetUser } from '../auth/decorator';
 export class RecipeController {
   constructor(private recipeService: RecipeService) {}
 
+  @UseGuards(JwtGuard)
+  @Get('my-recipes')
+  getMyRecipes(@GetUser('id') userId: number) {
+    return this.recipeService.getMyRecipes(userId);
+  }
+
   @Get()
   getRecipes() {
     return this.recipeService.getRecipes();
@@ -28,7 +34,6 @@ export class RecipeController {
   getRecipeById(@Param('id', ParseIntPipe) recipeId: number) {
     return this.recipeService.getRecipeById(recipeId);
   }
-
   @UseGuards(JwtGuard)
   @Post()
   createRecipe(

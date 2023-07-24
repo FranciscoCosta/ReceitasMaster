@@ -19,4 +19,14 @@ export class UserService {
 
     return user;
   }
+
+  async getUserById(userId: number) {
+    const user = await this.prisma.user.findFirst({
+      where: {
+        id: userId,
+      },
+    });
+    delete user.hashedPassword;
+    return user;
+  }
 }

@@ -174,7 +174,7 @@ const RecipeDetails = () => {
                   readonly
                 />
                 <p>
-                  ({recipe?.totalReviews}) - {recipe?.rating}{" "}
+                  ({recipe?.totalReviews}) - {(recipe?.rating)?.toFixed(1)}{" "}
                   estrelas
                 </p>
               </div>
@@ -211,7 +211,7 @@ const RecipeDetails = () => {
                 )}
               </div>
             </div>
-            <div className="RecipeDetails__reviews-add">
+            <div className="RecipeDetails__reviews-add" id="Add">
               <h2>Adicionar avaliação</h2>
               {currentUserEmail !== '' ? <div className="Reviews__add-container">
                 <div className="Reviews__add-container__rating">

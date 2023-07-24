@@ -8,6 +8,14 @@ export class RecipeService {
   getRecipes() {
     return this.prisma.recipe.findMany();
   }
+
+  async getMyRecipes(userId: number) {
+    const recipes = await this.prisma.recipe.findMany({
+      where: { userId },
+    });
+    return recipes;
+  }
+
   async createRecipe(userId: number, dto: CreateRecipeDto) {
     const recipe = await this.prisma.recipe.create({
       data: { userId, ...dto } as any,
