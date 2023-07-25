@@ -1,73 +1,70 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+  <h1>MasterReceita Backend</h1>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+  <p>O backend do MasterReceita foi desenvolvido utilizando o framework Nest.js com Typescript, e a base de dados foi implementada usando o Docker com PostgreSQL.</p>
 
-## Description
+   <h2>Configuração do Ambiente</h2>
+    <ol>
+        <li>Navegue para o diretório "server" e execute o comando para instalar as dependências:</li>
+    </ol>
+    <pre><code>cd sever
+npm install
+    </code></pre>
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+  <p>Renomeie o arquivo <code>.example.env</code> para <code>.env</code> e configure as variáveis de ambiente necessárias.</p>
 
-## Installation
+  <p>Certifique-se de que o Docker Desktop esteja instalado e em execução em sua máquina.</p>
 
-```bash
-$ npm install
-```
+  <p>Agora, inicie o servidor de desenvolvimento:</p>
+    <pre><code>npm run start:dev
+    </code></pre>
 
-## Running the app
+  <h2>Rotas</h2>
 
-```bash
-# development
-$ npm run start
+  <h3>Autenticação</h3>
+    <ul>
+        <li><code>POST /auth/signin</code>: Permite ao usuário fazer login e gera um token de acesso.</li>
+        <li><code>POST /auth/signup</code>: Permite cadastrar um novo usuário. Todos os dados são validados antes de serem armazenados.</li>
+    </ul>
 
-# watch mode
-$ npm run start:dev
+  <h3>Usuários</h3>
+    <ul>
+        <li><code>GET /users/me</code>: Devolve as informações do usuário logado.</li>
+        <li><code>GET /users/:id</code>: Devolve as informações do usuário com o ID fornecido na rota.</li>
+        <li><code>PATCH /users/</code>: Usada para atualizar os dados do usuário logado.</li>
+    </ul>
 
-# production mode
-$ npm run start:prod
-```
+  <h3>Receitas</h3>
+    <ul>
+        <li><code>GET /recipes</code>: Devolve todas as receitas disponíveis.</li>
+        <li><code>GET /recipes/:id</code>: Devolve as informações da receita com o ID fornecido na rota.</li>
+        <li><code>POST /recipes</code>: Usada para criar uma nova receita.</li>
+        <li><code>PATCH /recipes/:id</code>: Usada para atualizar os dados de uma receita. Esta rota é protegida para que apenas o dono da receita possa alterá-la.</li>
+        <li><code>DELETE /recipes/:id</code>: Usada para apagar uma receita. Esta rota também é protegida para que apenas o dono da receita possa excluí-la.</li>
+        <li><code>GET /recipes/my-recipes</code>: Usada para buscar as receitas do usuário logado.</li>
+    </ul>
 
-## Test
+   <h3>Reviews</h3>
+    <ul>
+        <li><code>GET /reviews/:id</code>: Devolve todas as reviews da receita com o ID fornecido na rota.</li>
+        <li><code>POST /reviews/:id</code>: Cria uma nova review para a receita com o ID fornecido na rota. Esta rota é protegida, permitindo que apenas usuários autenticados façam reviews.</li>
+        <li><code>PATCH /reviews/:id</code>: Atualiza uma review existente para a receita com o ID fornecido na rota. Esta rota também é protegida e requer autenticação.</li>
+        <li><code>DELETE /reviews/:id</code>: Apaga uma review existente da receita com o ID fornecido na rota. A rota é protegida para garantir que apenas o autor da review possa excluí-la.</li>
+    </ul>
 
-```bash
-# unit tests
-$ npm run test
+  <h2>Testes</h2>
+    <p>Foram utilizados testes end-to-end para garantir a funcionalidade correta das rotas e da lógica do backend. Para rodar os testes, siga as instruções abaixo:</p>
 
-# e2e tests
-$ npm run test:e2e
+  <ol>
+        <li>Renomeie o arquivo <code>example.env.test</code> para <code>.env.test</code> e configure as variáveis de ambiente necessárias para o ambiente de teste.</li>
+        <li>Execute o seguinte comando para reiniciar o banco de dados de teste:</li>
+    </ol>
+    <pre><code>npm run db:test:restart
+    </code></pre>
 
-# test coverage
-$ npm run test:cov
-```
+  <p>Agora, inicie os testes:</p>
+    <pre><code>npm run test
+    </code></pre>
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+</body>
+</html>
