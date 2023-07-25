@@ -1,34 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1>MasterReceita Frontend</h1>
 
-## Getting Started
+<p>Bem-vindo(a) ao repositório do frontend do site MasterReceita! Este é um aplicativo web desenvolvido utilizando Next.js e Framer Motion para animações. Abaixo, você encontrará informações importantes sobre o projeto e como executá-lo em sua máquina.</p>
 
-First, run the development server:
+<h2>Requisitos do Sistema</h2>
+<p>Certifique-se de que sua máquina atenda aos seguintes requisitos:</p>
+<ul>
+  <li>Node.js (versão 12 ou superior)</li>
+  <li>NPM (gerenciador de pacotes Node.js)</li>
+  <li>Git (opcional, mas recomendado para clonar o repositório)</li>
+</ul>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+<h2>Como Executar o Projeto</h2>
+<ol>
+  <li>Clone o repositório (caso ainda não tenha feito):</li>
+</ol>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<pre><code>git clone https://github.com/FranciscoCosta/ReceitasMaster.git
+cd client
+</code></pre>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<ol start="2">
+  <li>Instale as dependências:</li>
+</ol>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+<pre><code>npm install
+</code></pre>
 
-## Learn More
+<ol start="4">
+  <li>Execute o aplicativo em modo de desenvolvimento:</li>
+</ol>
 
-To learn more about Next.js, take a look at the following resources:
+<pre><code>npm run dev
+</code></pre>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<ol start="5">
+  <li>Acesse o aplicativo em seu navegador:</li>
+</ol>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<p>O aplicativo estará disponível em <a href="http://localhost:3000">http://localhost:3000</a>.</p>
 
-## Deploy on Vercel
+<h2>Estrutura do Projeto</h2>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<p>O frontend do MasterReceita possui as seguintes páginas e funcionalidades:</p>
+<ul>
+  <li>Página de Login: Permite que os usuários façam login em suas contas existentes.</li>
+  <li>Página de Cadastro de Usuários: Permite que novos usuários se registrem no sistema.</li>
+  <li>Página Inicial: Exibe todas as receitas disponíveis, com a opção de filtrá-las por categorias ou palavras-chave.</li>
+  <li>Página de Perfil do Usuário: Permite que o usuário visualize e atualize suas informações pessoais.</li>
+  <li>Página de Detalhes da Receita: Exibe todos os detalhes de uma receita específica, incluindo ingredientes, processos e tempo de cozimento. Além disso, permite que os usuários escrevam avaliações sobre a receita.</li>
+  <li>Página "Minhas Receitas": Permite que o usuário adicione, remova ou altere suas próprias receitas.</li>
+</ul>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
