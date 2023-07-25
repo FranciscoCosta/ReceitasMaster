@@ -140,7 +140,7 @@ const Navbar = () => {
                                 </div>
                             ) : (
                                 <div >
-                                    <Link href={"/"} className='Navbar__link'><CgProfile /></Link >
+                                    <Link href={"/profile"} className='Navbar__link'><CgProfile /></Link >
 
                                     <Link href={"/myrecipes"} className='Navbar__link'><BsBookFill /></Link >
 

@@ -13,9 +13,9 @@ import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 const MyRecipes = () => {
 
   const currentUserEmail = typeof window !== "undefined" ? localStorage.getItem("user") || '' : '';
+  const router = useRouter();
   const [recipes, setRecipes] = useState([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const router = useRouter();
   const [isAddRecipeModalOpen, setIsAddRecipeModalOpen] = useState<boolean>(false);
   const [isEditRecipeModalOpen, setIsEditRecipeModalOpen] = useState<boolean>(false);
   const [uploading, setUploading] = useState<boolean>(false);
