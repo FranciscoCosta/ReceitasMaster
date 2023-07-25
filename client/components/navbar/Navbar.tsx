@@ -17,12 +17,18 @@ import { useRouter } from 'next/navigation'
 
 
 const Navbar = () => {
+    const router = useRouter();
     const currentUserEmail = typeof window !== "undefined" ? localStorage.getItem("user") || '' : '';
     const [currentUser, setCurrentUser] = useState<any>({});
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [firstName, setFirstName] = useState<string>('');
     const [lastName, setLastName] = useState<string>('');
     const [userImage, setUserImage] = useState<string>('');
+
+
+    useEffect(() => {
+        router.refresh()
+    }, [router])
 
     useEffect(() => {
         if (currentUserEmail !== '') {
@@ -56,7 +62,6 @@ const Navbar = () => {
     };
 
     const [activeMenu, setActiveMenu] = useState(false)
-    const router = useRouter();
     return (
         <nav className='Navbar'>
             <div className='Navbar__container'>
