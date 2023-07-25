@@ -15,8 +15,10 @@ npm install
 
   <p>Certifique-se de que o Docker Desktop esteja instalado e em execução em sua máquina.</p>
 
-  <p>Agora, inicie o servidor de desenvolvimento:</p>
-    <pre><code>npm run start:dev
+  <p>Agora, rode os seguintes scripts para rodarem as migrations e seeders da databse e iniciar o servidor:</p>
+    <pre><code>
+      npm run db:dev:restart
+      npm run start:dev
     </code></pre>
 
   <h2>Rotas</h2>
